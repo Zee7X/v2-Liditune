@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "819090848136",
+    "project_id": "liditune-ae513",
+    "storage_bucket": "liditune-ae513.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:819090848136:android:5243381259cb138001e23d",
+        "android_client_info": {
+          "package_name": "com.pnc.literasi_digital_tuna_netra"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBu9XaZ11I01Ecg-24VTRZfCWL-92WrpKc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
