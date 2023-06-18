@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
@@ -8,8 +7,8 @@ import '../../../utils/menu.dart';
 import '../controllers/result_ocr_controller.dart';
 
 class ResultOcrView extends GetView<ResultOcrController> {
-  final String text;
-  const ResultOcrView({Key? key, required this.text}) : super(key: key);
+  const ResultOcrView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +19,7 @@ class ResultOcrView extends GetView<ResultOcrController> {
           children: [
             InkWell(
               onTap: () {
-                Get.back();
+                controller.goBackToScreen();
               },
               child: Container(
                 height: 75,
@@ -69,6 +68,7 @@ class ResultOcrView extends GetView<ResultOcrController> {
             ),
             InkWell(
               onTap: () {
+                controller.stopSpeaking();
                 controller.speakText();
               },
               child: Menu(

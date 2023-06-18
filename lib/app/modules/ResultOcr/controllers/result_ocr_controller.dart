@@ -33,7 +33,22 @@ class ResultOcrController extends GetxController {
   Future<void> speakText() async {
     await flutterTts.setLanguage("id-ID");
     await flutterTts.setPitch(1.0);
-    await flutterTts.speak(scannedText.value);
+    await flutterTts.speak(scannedText.value).then((_) {
+      speake(
+        "Pembacaan selesai, silahkan klik tombol bawah untuk putar ulang, klik tombol atas untuk kembali mengambil gambar",
+      );
+    });
+    ;
+  }
+
+
+
+  Future<void> speake(String? text) async {
+    if (text != null) {
+      await flutterTts.setLanguage("id-ID");
+      await flutterTts.setPitch(1.0);
+      await flutterTts.speak(text);
+    }
   }
 
   Future<void> stopSpeaking() async {
@@ -49,10 +64,11 @@ class ResultOcrController extends GetxController {
     initTts();
   }
 
-  void onClose() {
-    if (!isGoingBack.value) {
-      stopSpeaking();
-    }
-    super.onClose();
+  void goBackToScreen() {
+    isGoingBack.value = true;
+    stopSpeaking();
+    Get.back();
+    speake(
+        'Silahkan ambil gambar lain dengan menekan tombol bawah. untuk kembali ke home tekan tombol atas');
   }
 }

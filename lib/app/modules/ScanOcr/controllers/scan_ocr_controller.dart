@@ -6,6 +6,7 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:permission_handler/permission_handler.dart';
+
 import '../../ResultOcr/controllers/result_ocr_controller.dart';
 import '../../ResultOcr/views/result_ocr_view.dart';
 
@@ -17,8 +18,10 @@ class ScanOcrController extends GetxController with WidgetsBindingObserver {
   bool isPermissionGranted = false;
   final state = TtsState.stopped.obs;
   final Rx<CameraController?> cameraController = Rx<CameraController?>(null);
-  final textRecognizer = TextRecognizer();
+  final textRecognizer = TextRecognizer(script: TextRecognitionScript.latin);
   final RxBool isGoingBack = false.obs;
+  final ResultOcrController resultOcrController =
+      Get.put(ResultOcrController());
 
   @override
   void onInit() {
@@ -43,7 +46,7 @@ class ScanOcrController extends GetxController with WidgetsBindingObserver {
 
   Future<void> requestCameraPermission() async {
     final status = await Permission.camera.request();
-    isPermissionGranted = status == PermissionStatus.granted;
+    isPermissionGranted = status.isGranted;
     if (isPermissionGranted) {
       startCamera();
     }
@@ -112,7 +115,7 @@ class ScanOcrController extends GetxController with WidgetsBindingObserver {
     cameraController.value = CameraController(
       camera,
       ResolutionPreset.max,
-      enableAudio: false,
+      enableAudio: true,
     );
     await cameraController.value?.initialize();
     if (cameraController.value?.value.isInitialized == true) {
@@ -129,10 +132,11 @@ class ScanOcrController extends GetxController with WidgetsBindingObserver {
       final file = File(pictureFile!.path);
       final inputImage = InputImage.fromFilePath(file.path);
       final recognisedText = await textRecognizer.processImage(inputImage);
+      print('Teks Terdeteksi: ${recognisedText.text}');
+      stopSpeaking();
       speakText('Scan Berhasil. Silahkan Tekan Tombol Bawah Bacakan.');
-      final resultOcrController = Get.find<ResultOcrController>();
       resultOcrController.setScannedText(recognisedText.text);
-      await Get.to(() => ResultOcrView(text: recognisedText.text));
+      await Get.to(() => ResultOcrView());
     } catch (e) {
       speakText('Pengambilan Gambar Gagal. Silahkan Ulangi.');
     }
@@ -141,7 +145,7 @@ class ScanOcrController extends GetxController with WidgetsBindingObserver {
   void goBackToHome() {
     isGoingBack.value = true;
     stopSpeaking();
-    speakText('Anda kembali ke home. Silahkan pilih fitur.');
     Get.back();
+    speakText('Anda kembali ke home. silahkan pilih fitur');
   }
 }

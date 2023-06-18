@@ -111,9 +111,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.RESULT_OCR,
-      page: () => ResultOcrView(
-        text: '',
-      ),
+      page: () => ResultOcrView(),
       binding: ResultOcrBinding(),
     ),
   ];

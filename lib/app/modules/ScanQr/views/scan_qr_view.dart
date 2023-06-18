@@ -62,7 +62,7 @@ class ScanQrView extends GetView<ScanQrController> {
                     'assets/images/mic.json',
                   ),
                   t1: controller.state.value == TtsState.playing
-                      ? 'Stop'
+                      ? 'Berhenti'
                       : 'Bacakan',
                   t2: '',
                 ),

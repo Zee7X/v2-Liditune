@@ -80,7 +80,13 @@ class ScanQrController extends GetxController {
   }
 
   void playConvertedText() {
-    speakText(convertedText);
+    if (state.value == TtsState.playing) {
+      stopSpeaking();
+    } else {
+      speakText(convertedText).then((_) {
+        speakText("Pembacaan selesai, silahkan scan QR lainnya");
+      });
+    }
   }
 
   void clearScanResult() {
@@ -95,7 +101,7 @@ class ScanQrController extends GetxController {
   void goBackToHome() {
     isGoingBack.value = true;
     stopSpeaking();
-    speakText('Anda kembali ke home. silahkan pilih fitur');
     Get.back();
+    speakText('Anda kembali ke home. silahkan pilih fitur');
   }
 }
