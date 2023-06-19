@@ -16,8 +16,7 @@ import 'package:literasi_digital_tuna_netra/app/modules/Literatur/bindings/liter
 import 'package:literasi_digital_tuna_netra/app/modules/Literatur/views/literatur_view.dart';
 import 'package:literasi_digital_tuna_netra/app/modules/Login/bindings/login_binding.dart';
 import 'package:literasi_digital_tuna_netra/app/modules/Login/views/login_view.dart';
-import 'package:literasi_digital_tuna_netra/app/modules/Navigasi/bindings/navigasi_binding.dart';
-import 'package:literasi_digital_tuna_netra/app/modules/Navigasi/views/navigasi_view.dart';
+
 import 'package:literasi_digital_tuna_netra/app/modules/Profile/bindings/profile_binding.dart';
 import 'package:literasi_digital_tuna_netra/app/modules/Profile/views/profile_view.dart';
 import 'package:literasi_digital_tuna_netra/app/modules/ResultOcr/bindings/result_ocr_binding.dart';
@@ -103,11 +102,6 @@ class AppPages {
       name: _Paths.CHANGE_PASSWORD,
       page: () => ChangePasswordView(),
       binding: ChangePasswordBinding(),
-    ),
-    GetPage(
-      name: _Paths.NAVIGASI,
-      page: () => NavigasiView(),
-      binding: NavigasiBinding(),
     ),
     GetPage(
       name: _Paths.RESULT_OCR,
