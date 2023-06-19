@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import 'package:literasi_digital_tuna_netra/app/modules/AboutUs/bindings/about_us_binding.dart';
+import 'package:literasi_digital_tuna_netra/app/modules/AboutUs/views/about_us_view.dart';
 import 'package:literasi_digital_tuna_netra/app/modules/AddLiteratur/bindings/add_literatur_binding.dart';
 import 'package:literasi_digital_tuna_netra/app/modules/AddLiteratur/views/add_literatur_view.dart';
 import 'package:literasi_digital_tuna_netra/app/modules/AddPengelola/bindings/add_pengelola_binding.dart';
@@ -14,9 +16,12 @@ import 'package:literasi_digital_tuna_netra/app/modules/ForgetPassword/bindings/
 import 'package:literasi_digital_tuna_netra/app/modules/ForgetPassword/views/forget_password_view.dart';
 import 'package:literasi_digital_tuna_netra/app/modules/Literatur/bindings/literatur_binding.dart';
 import 'package:literasi_digital_tuna_netra/app/modules/Literatur/views/literatur_view.dart';
+import 'package:literasi_digital_tuna_netra/app/modules/LiteraturAdmin/bindings/literatur_admin_binding.dart';
+import 'package:literasi_digital_tuna_netra/app/modules/LiteraturAdmin/views/literatur_admin_view.dart';
 import 'package:literasi_digital_tuna_netra/app/modules/Login/bindings/login_binding.dart';
 import 'package:literasi_digital_tuna_netra/app/modules/Login/views/login_view.dart';
-
+import 'package:literasi_digital_tuna_netra/app/modules/Pengelola/bindings/pengelola_binding.dart';
+import 'package:literasi_digital_tuna_netra/app/modules/Pengelola/views/pengelola_view.dart';
 import 'package:literasi_digital_tuna_netra/app/modules/Profile/bindings/profile_binding.dart';
 import 'package:literasi_digital_tuna_netra/app/modules/Profile/views/profile_view.dart';
 import 'package:literasi_digital_tuna_netra/app/modules/ResultOcr/bindings/result_ocr_binding.dart';
@@ -107,6 +112,21 @@ class AppPages {
       name: _Paths.RESULT_OCR,
       page: () => ResultOcrView(),
       binding: ResultOcrBinding(),
+    ),
+    GetPage(
+      name: _Paths.LITERATUR_ADMIN,
+      page: () => LiteraturAdminView(),
+      binding: LiteraturAdminBinding(),
+    ),
+    GetPage(
+      name: _Paths.PENGELOLA,
+      page: () => PengelolaView(),
+      binding: PengelolaBinding(),
+    ),
+    GetPage(
+      name: _Paths.ABOUT_US,
+      page: () => AboutUsView(),
+      binding: AboutUsBinding(),
     ),
   ];
 }

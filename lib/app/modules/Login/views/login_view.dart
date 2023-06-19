@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:literasi_digital_tuna_netra/app/routes/app_pages.dart';
 import 'package:lottie/lottie.dart';
+import 'package:literasi_digital_tuna_netra/app/routes/app_pages.dart';
 
 import '../../../utils/rubik16.dart';
 import '../../../utils/rubik20.dart';
@@ -15,30 +14,33 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Get.back();
+            Get.toNamed(Routes.HOME);
           },
         ),
-        backgroundColor: const Color(0XFF8058FB),
+        backgroundColor: const Color(0xFF240B74),
         elevation: 0,
       ),
-      backgroundColor: const Color(0XFF8058FB),
-      body: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: const SystemUiOverlayStyle(
-          statusBarColor: Colors.transparent,
-          systemNavigationBarColor: Colors.transparent,
-          statusBarIconBrightness: Brightness.dark,
-          systemNavigationBarIconBrightness: Brightness.dark,
+      body: Container(
+        width: Get.width,
+        height: Get.height,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              const Color(0xFF240B74),
+              const Color(0xFF0A0B0D),
+            ],
+          ),
         ),
         child: SafeArea(
           child: Padding(
-            padding: EdgeInsets.only(
-              left: MediaQuery.of(context).size.width / 20.7,
-              right: MediaQuery.of(context).size.width / 20.7,
-            ),
+            padding: EdgeInsets.symmetric(horizontal: 20),
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -93,7 +95,10 @@ class LoginView extends GetView<LoginController> {
                     children: [
                       InkWell(
                         onTap: () => Get.toNamed(Routes.FORGET_PASSWORD),
-                        child: Rubik16(text: 'Lupa Password?'),
+                        child: Rubik16(
+                          text: 'Lupa Password?',
+                          color: Colors.white,
+                        ),
                       ),
                     ],
                   ),
@@ -122,7 +127,7 @@ class LoginView extends GetView<LoginController> {
                             ? 'Login'
                             : 'LOADING ...',
                         fontweight: FontWeight.w500,
-                        color: const Color(0XFF026ca0),
+                        color: Colors.black,
                       ),
                     ),
                   ),

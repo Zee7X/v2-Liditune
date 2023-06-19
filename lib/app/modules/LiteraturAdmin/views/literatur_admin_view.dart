@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import '../controllers/edit_profile_controller.dart';
+import '../../../routes/app_pages.dart';
+import '../controllers/literatur_admin_controller.dart';
 
-class EditProfileView extends GetView<EditProfileController> {
+class LiteraturAdminView extends GetView<LiteraturAdminController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
-        title: Text('Edit Profile'),
+        title: Text('Literatur'),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new),
@@ -18,6 +19,14 @@ class EditProfileView extends GetView<EditProfileController> {
             Get.back();
           },
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.menu_book),
+            onPressed: () {
+              Get.toNamed(Routes.ADD_LITERATUR);
+            },
+          ),
+        ],
         backgroundColor: const Color(0xFF240B74),
         elevation: 0,
       ),

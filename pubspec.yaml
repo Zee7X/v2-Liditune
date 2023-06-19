@@ -22,11 +22,12 @@ dependencies:
   firebase_auth: ^4.6.1
   cloud_firestore: ^4.7.1
   intl: ^0.18.1
-  dropdown_search: ^5.0.6
   firebase_storage: ^11.2.1
   image_picker: ^0.8.7+5
-  line_awesome_flutter: ^2.0.0
   get_cli: ^0.2.30
+  file_picker: ^5.3.0
+  assets_audio_player: ^3.0.6
+  dropdown_search: ^5.0.6
 
 
 

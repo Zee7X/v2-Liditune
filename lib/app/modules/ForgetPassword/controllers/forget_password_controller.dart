@@ -21,7 +21,6 @@ class ForgetPasswordController extends GetxController {
         isNotifikasi.value = "Terkirim! Silahkan cek email anda";
       } catch (e) {
         isNotifikasi.value = "Email tidak ada! Silahkan cek kembali";
-        // Get.snackbar("title", "message");
       } finally {
         isLoading.value = false;
       }

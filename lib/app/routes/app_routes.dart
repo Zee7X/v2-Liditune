@@ -18,6 +18,9 @@ abstract class Routes {
   static const ADD_PENGELOLA = _Paths.ADD_PENGELOLA;
   static const CHANGE_PASSWORD = _Paths.CHANGE_PASSWORD;
   static const RESULT_OCR = _Paths.RESULT_OCR;
+  static const LITERATUR_ADMIN = _Paths.LITERATUR_ADMIN;
+  static const PENGELOLA = _Paths.PENGELOLA;
+  static const ABOUT_US = _Paths.ABOUT_US;
 }
 
 abstract class _Paths {
@@ -35,4 +38,7 @@ abstract class _Paths {
   static const ADD_PENGELOLA = '/add-pengelola';
   static const CHANGE_PASSWORD = '/change-password';
   static const RESULT_OCR = '/result-ocr';
+  static const LITERATUR_ADMIN = '/literatur-admin';
+  static const PENGELOLA = '/pengelola';
+  static const ABOUT_US = '/about-us';
 }
