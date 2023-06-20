@@ -20,6 +20,7 @@ class LoginView extends GetView<LoginController> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Get.toNamed(Routes.HOME);
+            controller.resetFields();
           },
         ),
         backgroundColor: const Color(0xFF240B74),

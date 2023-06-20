@@ -181,7 +181,7 @@ class AddPengelolaView extends GetView<AddPengelolaController> {
                     style: ElevatedButton.styleFrom(
                       elevation: 0.3,
                       shadowColor: Colors.grey.withOpacity(0.2),
-                      backgroundColor: const Color(0XFFffdf0a),
+                      backgroundColor: const Color(0xFF240B74),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25),
                       ),
@@ -201,7 +201,7 @@ class AddPengelolaView extends GetView<AddPengelolaController> {
                           ? 'Submit'
                           : 'Loading ...',
                       fontweight: FontWeight.w500,
-                      color: Colors.black,
+                      color: Colors.white,
                     ),
                   ),
                 ),

@@ -6,8 +6,11 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:file_picker/file_picker.dart';
 
 import '../../../routes/app_pages.dart';
+import '../../LiteraturAdmin/controllers/literatur_admin_controller.dart';
 
 class AddLiteraturController extends GetxController {
+  final LiteraturAdminController literaturAdminController =
+      Get.find<LiteraturAdminController>();
   final firebase_storage.FirebaseStorage _storage =
       firebase_storage.FirebaseStorage.instance;
 
@@ -59,6 +62,7 @@ class AddLiteraturController extends GetxController {
         'audioUrl': audioUrl,
       });
       print('Berhasil Upload');
+      literaturAdminController.fetchUploadedData();
       Get.back();
       Get.defaultDialog(
         backgroundColor: Color(0Xff252835),

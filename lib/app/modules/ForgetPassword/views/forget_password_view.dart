@@ -87,7 +87,6 @@ class ForgetPasswordView extends GetView<ForgetPasswordController> {
                       onPressed: () async {
                         if (controller.isLoading.isFalse) {
                           await controller.sendEmail();
-                          // controller.resetFields();
                         }
                       },
                       child: Rubik20(

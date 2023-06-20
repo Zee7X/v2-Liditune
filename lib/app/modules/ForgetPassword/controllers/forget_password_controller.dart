@@ -9,18 +9,43 @@ class ForgetPasswordController extends GetxController {
 
   FirebaseAuth auth = FirebaseAuth.instance;
 
-  // void resetFields() {
-  //   emailC.clear();
-  // }
+  void resetFields() {
+    emailC.clear();
+  }
 
   Future<void> sendEmail() async {
     if (emailC.text.isNotEmpty) {
       isLoading.value = true;
       try {
         await auth.sendPasswordResetEmail(email: emailC.text);
-        isNotifikasi.value = "Terkirim! Silahkan cek email anda";
+        // isNotifikasi.value = "Terkirim! Silahkan cek email anda";
+        Get.snackbar(
+          "Informasi",
+          "Terkirim! Silahkan cek email anda",
+          titleText: const Text(
+            'Informasi',
+            style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
+          ),
+          backgroundColor: Color(0Xff252835),
+          colorText: Colors.white,
+          borderWidth: 1,
+          borderColor: Colors.grey.withOpacity(0.2),
+        );
+        resetFields();
       } catch (e) {
-        isNotifikasi.value = "Email tidak ada! Silahkan cek kembali";
+        // isNotifikasi.value = "Email tidak ada! Silahkan cek kembali";
+        Get.snackbar(
+          "Peringatan",
+          "Email Tidak Ada",
+          titleText: const Text(
+            'Peringatan',
+            style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+          ),
+          backgroundColor: Color(0Xff252835),
+          colorText: Colors.white,
+          borderWidth: 1,
+          borderColor: Colors.grey.withOpacity(0.2),
+        );
       } finally {
         isLoading.value = false;
       }
@@ -32,8 +57,8 @@ class ForgetPasswordController extends GetxController {
           'Peringatan',
           style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
         ),
-        backgroundColor: Colors.white,
-        colorText: Colors.black,
+        backgroundColor: Color(0Xff252835),
+        colorText: Colors.white,
         borderWidth: 1,
         borderColor: Colors.grey.withOpacity(0.2),
       );
