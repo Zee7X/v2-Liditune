@@ -17,6 +17,15 @@ class LiteraturAdminController extends GetxController {
     fetchUploadedData();
   }
 
+  Future<bool> onBackPressed() async {
+    if (currentPlayingLiterature != null &&
+        currentPlayingLiterature!.isPlaying) {
+      currentPlayingLiterature!.stopAudio();
+      return false;
+    }
+    return true;
+  }
+
   Future<void> deleteLiteratur(String documentId) async {
     try {
       final confirmed = await Get.dialog<bool>(
@@ -118,6 +127,9 @@ class LiteraturAdminController extends GetxController {
     }
     literature.playAudio();
     currentPlayingLiterature = literature;
+    uploadedLiteratures.forEach((item) {
+      item.isPlaying = (item == literature);
+    });
   }
 }
 
@@ -167,6 +179,4 @@ class UploadedLiterature {
       print('Error stopping audio: $e');
     }
   }
-
-  
 }

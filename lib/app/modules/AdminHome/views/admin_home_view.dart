@@ -268,7 +268,7 @@ class AdminHomeView extends GetView<AdminHomeController> {
                           Padding(
                             padding: const EdgeInsets.only(top: 10.0),
                             child: Image.asset(
-                              'assets/images/notebook.png',
+                              'assets/images/bookmark.png',
                               width: Get.width / 3.75,
                               height: Get.height / 8.3,
                             ),
