@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:literasi_digital_tuna_netra/app/routes/app_pages.dart';
 
 import '../controllers/admin_home_controller.dart';
@@ -145,43 +146,58 @@ class AdminHomeView extends GetView<AdminHomeController> {
               ),
             ),
             Center(
-              child: Container(
-                width: Get.width / 1.10,
-                height: Get.height / 5.22,
-                decoration: BoxDecoration(
-                  color: Color(0Xff252835),
-                  borderRadius: BorderRadius.circular(7),
-                ),
-                child: Row(
-                  children: [
-                    Image.asset(
-                      'assets/images/notebook.png',
-                      width: Get.width / 3.8,
-                      height: Get.height / 8.5,
-                    ),
-                    Text(
-                      "Jumlah\nBuku",
-                      style: GoogleFonts.poppins(
-                        textStyle: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                        ),
+              child: StreamBuilder<QuerySnapshot>(
+                stream: FirebaseFirestore.instance
+                    .collection('audioliteratur')
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return CircularProgressIndicator();
+                  } else if (snapshot.hasError) {
+                    return Text('Error fetching data');
+                  } else {
+                    final count = snapshot.data?.docs.length ?? 0;
+
+                    return Container(
+                      width: Get.width / 1.10,
+                      height: Get.height / 5.22,
+                      decoration: BoxDecoration(
+                        color: Color(0Xff252835),
+                        borderRadius: BorderRadius.circular(7),
                       ),
-                    ),
-                    SizedBox(width: 70),
-                    Text(
-                      "12",
-                      style: GoogleFonts.poppins(
-                        textStyle: TextStyle(
-                          color: Color(0XFF876EFE),
-                          fontSize: 64,
-                          fontWeight: FontWeight.w900,
-                        ),
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            'assets/images/notebook.png',
+                            width: Get.width / 3.8,
+                            height: Get.height / 8.5,
+                          ),
+                          Text(
+                            "Jumlah\nBuku",
+                            style: GoogleFonts.poppins(
+                              textStyle: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 70),
+                          Text(
+                            count.toString(),
+                            style: GoogleFonts.poppins(
+                              textStyle: TextStyle(
+                                color: Color(0XFF876EFE),
+                                fontSize: 64,
+                                fontWeight: FontWeight.w900,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
+                    );
+                  }
+                },
               ),
             ),
             Padding(

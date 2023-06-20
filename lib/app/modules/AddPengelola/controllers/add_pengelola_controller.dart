@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AddPengelolaController extends GetxController{
+class AddPengelolaController extends GetxController {
   RxBool isLoading = false.obs;
   var isPasswordHidden = true.obs;
   var selected = ''.obs;
@@ -64,13 +64,21 @@ class AddPengelolaController extends GetxController{
             title: "Berhasil",
             middleText:
                 "Berhasil Tambah Pengelola, Cek Email Untuk Verifikasi!",
+            backgroundColor: Color(0Xff252835),
+            titleStyle: TextStyle(color: Colors.white),
+            middleTextStyle: TextStyle(color: Colors.white),
+            radius: 25.0,
             actions: [
               OutlinedButton(
-                  onPressed: () {
-                    isLoading.value = false;
-                    Get.back();
-                  },
-                  child: const Text("Tutup"))
+                onPressed: () {
+                  isLoading.value = false;
+                  Get.back();
+                },
+                child: const Text(
+                  "Tutup",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
             ],
           );
         }

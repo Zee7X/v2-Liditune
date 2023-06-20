@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 
 import '../../../routes/app_pages.dart';
@@ -31,6 +30,8 @@ class LiteraturAdminView extends GetView<LiteraturAdminController> {
         elevation: 0,
       ),
       body: Container(
+        width: Get.width,
+        height: Get.height,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -39,6 +40,48 @@ class LiteraturAdminView extends GetView<LiteraturAdminController> {
               const Color(0xFF240B74),
               const Color(0xFF0A0B0D),
             ],
+          ),
+        ),
+        child: RefreshIndicator(
+          onRefresh: () async {
+            await controller.uploadedLiteraturesStream;
+          },
+          child: StreamBuilder<List<UploadedLiterature>>(
+            stream: controller.uploadedLiteraturesStream,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return Text('Error fetching data');
+              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                return Center(child: Text('No data available'));
+              } else {
+                final uploadedLiteratures = snapshot.data!;
+                return ListView.builder(
+                  itemCount: uploadedLiteratures.length,
+                  itemBuilder: (context, index) {
+                    final literature = uploadedLiteratures[index];
+                    return ListTile(
+                      title: Text(literature.title),
+                      subtitle: Text(literature.name),
+                      leading: CircleAvatar(
+                        backgroundImage: NetworkImage(literature.imageUrl),
+                      ),
+                      trailing: IconButton(
+                        icon: literature.isPlaying
+                            ? Icon(Icons.stop)
+                            : Icon(Icons.play_arrow),
+                        onPressed: () {
+                          literature.isPlaying
+                              ? literature.stopAudio()
+                              : literature.playAudio();
+                        },
+                      ),
+                    );
+                  },
+                );
+              }
+            },
           ),
         ),
       ),

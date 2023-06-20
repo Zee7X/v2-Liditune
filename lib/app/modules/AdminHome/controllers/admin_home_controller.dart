@@ -54,6 +54,17 @@ class AdminHomeController extends GetxController {
     );
   }
 
+  Future<int> countDocuments() async {
+    try {
+      final snapshot =
+          await FirebaseFirestore.instance.collection('audioliteratur').get();
+      return snapshot.size;
+    } catch (e) {
+      print('Error counting documents: $e');
+      return 0;
+    }
+  }
+
   // String getCurrentDateTimeText() {
   //   initializeDateFormatting('id_ID', null);
   //   final now = DateTime.now();
