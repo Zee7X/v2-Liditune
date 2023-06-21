@@ -25,7 +25,7 @@ class ScanQrView extends GetView<ScanQrController> {
                 controller.goBackToHome();
               },
               child: Container(
-                height: 75,
+                height: Get.height / 13,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
                     bottomRight: Radius.circular(15),

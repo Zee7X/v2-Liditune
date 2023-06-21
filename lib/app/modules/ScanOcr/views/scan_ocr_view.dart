@@ -34,7 +34,7 @@ class ScanOcrView extends GetView<ScanOcrController> {
                           controller.goBackToHome();
                         },
                         child: Container(
-                          height: 75,
+                          height: Get.height / 13,
                           decoration: const BoxDecoration(
                             borderRadius: BorderRadius.only(
                               bottomRight: Radius.circular(15),
@@ -58,7 +58,7 @@ class ScanOcrView extends GetView<ScanOcrController> {
                       ),
                       Expanded(child: Container()),
                       InkWell(
-                        onTap: () => controller.scanImage(), 
+                        onTap: () => controller.scanImage(),
                         child: Menu(
                           bgcolor: const Color(0XFFFFAE5F),
                           ico: Lottie.asset(

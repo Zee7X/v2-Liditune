@@ -9,7 +9,7 @@ class LiteraturAdminController extends GetxController {
   Stream<List<UploadedLiterature>> get uploadedLiteraturesStream =>
       uploadedLiteratures.stream;
   final AudioPlayer audioPlayer = AudioPlayer();
-  UploadedLiterature? currentPlayingLiterature;
+  UploadedLiterature currentPlayingLiterature = UploadedLiterature.empty();
 
   @override
   void onInit() {
@@ -18,9 +18,8 @@ class LiteraturAdminController extends GetxController {
   }
 
   Future<bool> onBackPressed() async {
-    if (currentPlayingLiterature != null &&
-        currentPlayingLiterature!.isPlaying) {
-      currentPlayingLiterature!.stopAudio();
+    if (currentPlayingLiterature.isPlaying) {
+      currentPlayingLiterature.stopAudio();
       return false;
     }
     return true;
@@ -120,10 +119,8 @@ class LiteraturAdminController extends GetxController {
   }
 
   void playLiteratureAudio(UploadedLiterature literature) {
-    if (currentPlayingLiterature != null) {
-      if (currentPlayingLiterature!.isPlaying) {
-        currentPlayingLiterature!.stopAudio();
-      }
+    if (currentPlayingLiterature.isPlaying) {
+      currentPlayingLiterature.stopAudio();
     }
     literature.playAudio();
     currentPlayingLiterature = literature;
@@ -173,6 +170,14 @@ class UploadedLiterature {
     required this.imageUrl,
     required this.audioUrl,
   });
+
+  UploadedLiterature.empty()
+      : documentId = '',
+        name = '',
+        title = '',
+        imageUrl = '',
+        audioUrl = '',
+        isPlaying = false;
 
   factory UploadedLiterature.fromDocumentSnapshot(
       DocumentSnapshot doc, String documentId) {

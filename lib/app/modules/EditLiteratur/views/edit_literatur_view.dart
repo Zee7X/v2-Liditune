@@ -147,7 +147,7 @@ class EditLiteraturView extends GetView<EditLiteraturController> {
                         decoration: InputDecoration(
                           hintText: controller.title.value.isEmpty
                               ? literature.title
-                              : null,
+                              : 'Masukan Judul Literatur',
                           contentPadding: EdgeInsets.symmetric(horizontal: 12),
                           hintStyle: TextStyle(color: Colors.black),
                           border: OutlineInputBorder(
@@ -182,7 +182,7 @@ class EditLiteraturView extends GetView<EditLiteraturController> {
                         decoration: InputDecoration(
                           hintText: controller.name.value.isEmpty
                               ? literature.name
-                              : null,
+                              : 'Masukan Nama Pengarang',
                           contentPadding: EdgeInsets.symmetric(horizontal: 12),
                           hintStyle: TextStyle(color: Colors.black),
                           border: OutlineInputBorder(
