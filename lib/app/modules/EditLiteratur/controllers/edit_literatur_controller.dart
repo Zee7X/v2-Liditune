@@ -1,12 +1,13 @@
 import 'dart:io';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:file_picker/file_picker.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../../LiteraturAdmin/controllers/literatur_admin_controller.dart';
 
-class AddLiteraturController extends GetxController {
+class EditLiteraturController extends GetxController {
   final LiteraturAdminController literaturAdminController =
       Get.find<LiteraturAdminController>();
   final firebase_storage.FirebaseStorage _storage =
@@ -20,6 +21,15 @@ class AddLiteraturController extends GetxController {
   RxString name = RxString('');
   RxBool uploading = RxBool(false);
   RxBool isLoading = false.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    // Mengisi data yang ada ke dalam form
+    final literature = Get.arguments as UploadedLiterature;
+    title.value = literature.title;
+    name.value = literature.name;
+  }
 
   Future<void> pickImage() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -41,22 +51,7 @@ class AddLiteraturController extends GetxController {
     }
   }
 
-  Future<void> uploadToFirebase() async {
-    if (imageFile.value == null || audioFile.value == null) {
-      Get.snackbar(
-        "Peringatan",
-        "Image dan Audio Harus Diisi",
-        titleText: const Text(
-          'Peringatan',
-          style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
-        ),
-        backgroundColor: Color(0Xff252835),
-        colorText: Colors.white,
-        borderWidth: 1,
-        borderColor: Colors.grey.withOpacity(0.2),
-      );
-      return;
-    }
+  Future<void> updateLiterature() async {
     if (name.value.isEmpty || title.value.isEmpty) {
       Get.snackbar(
         "Peringatan",
@@ -72,21 +67,54 @@ class AddLiteraturController extends GetxController {
       );
       return;
     }
-    String imageName = 'image_${DateTime.now().millisecondsSinceEpoch}.jpg';
-    String audioName = 'audio_${DateTime.now().millisecondsSinceEpoch}.mp3';
+
+    String imageUrl = '';
+    String audioUrl = '';
+
+    if (imageFile.value != null) {
+      String imageName = 'image_${DateTime.now().millisecondsSinceEpoch}.jpg';
+      try {
+        uploading.value = true;
+        await _storage.ref(imageName).putFile(imageFile.value!);
+        imageUrl = await _storage.ref(imageName).getDownloadURL();
+      } catch (e) {
+        print('Error uploading image to Firebase Storage: $e');
+        Get.snackbar('Upload Error', 'An error occurred during image upload');
+        return;
+      }
+    }
+
+    if (audioFile.value != null) {
+      String audioName = 'audio_${DateTime.now().millisecondsSinceEpoch}.mp3';
+      try {
+        uploading.value = true;
+        await _storage.ref(audioName).putFile(audioFile.value!);
+        audioUrl = await _storage.ref(audioName).getDownloadURL();
+      } catch (e) {
+        print('Error uploading audio to Firebase Storage: $e');
+        Get.snackbar('Upload Error', 'An error occurred during audio upload');
+        return;
+      }
+    }
+
+    UploadedLiterature?
+        literature; // Declare as nullable and assign initial value
+
     try {
-      uploading.value = true;
-      await _storage.ref(imageName).putFile(imageFile.value!);
-      String imageUrl = await _storage.ref(imageName).getDownloadURL();
-      await _storage.ref(audioName).putFile(audioFile.value!);
-      String audioUrl = await _storage.ref(audioName).getDownloadURL();
-      await FirebaseFirestore.instance.collection('literatur').add({
+      // Retrieve the actual value of literature from Get.arguments
+      literature = Get.arguments as UploadedLiterature;
+
+      // Melakukan update data di Firebase Firestore
+      await FirebaseFirestore.instance
+          .collection('literatur')
+          .doc(literature.documentId)
+          .update({
         'name': name.value,
         'title': title.value,
-        'imageUrl': imageUrl,
-        'audioUrl': audioUrl,
+        if (imageUrl.isNotEmpty) 'imageUrl': imageUrl,
+        if (audioUrl.isNotEmpty) 'audioUrl': audioUrl,
       });
-      print('Berhasil Upload');
+
       literaturAdminController.fetchUploadedData();
       Get.back();
       Get.defaultDialog(
@@ -94,7 +122,7 @@ class AddLiteraturController extends GetxController {
         titleStyle: TextStyle(color: Colors.white),
         middleTextStyle: TextStyle(color: Colors.white),
         title: "Berhasil",
-        middleText: "Berhasil Upload Literatur",
+        middleText: "Berhasil Update Literatur",
         radius: 25.0,
         actions: [
           OutlinedButton(
@@ -113,8 +141,8 @@ class AddLiteraturController extends GetxController {
         ],
       );
     } catch (e) {
-      print('Error uploading to Firebase: $e');
-      Get.snackbar('Upload Error', 'An error occurred during upload');
+      print('Error updating to Firebase: $e');
+      Get.snackbar('Update Error', 'An error occurred during update');
     } finally {
       uploading.value = false;
     }

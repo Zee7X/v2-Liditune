@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "1077899662339",
-    "project_id": "literasi-digital-64774",
-    "storage_bucket": "literasi-digital-64774.appspot.com"
+    "project_number": "341316287916",
+    "project_id": "new-liditune",
+    "storage_bucket": "new-liditune.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1077899662339:android:0b6d32d786d4389f15ea36",
+        "mobilesdk_app_id": "1:341316287916:android:595dde035155c051a80e09",
         "android_client_info": {
           "package_name": "com.pnc.literasi_digital_tuna_netra"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1077899662339-m3d8i9uha3uvp24e11o1hnp1a4uoljf1.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.pnc.literasi_digital_tuna_netra",
-            "certificate_hash": "b69664832142b40ee721e11be5f2ce9e643be6e2"
-          }
-        },
-        {
-          "client_id": "1077899662339-mbmk4grm19jelgi1t56g91m4u7fp3135.apps.googleusercontent.com",
+          "client_id": "341316287916-vhmvfnlfcji1i77niacjbe6v78pfko5i.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBuo8o0QjWSSBqoM1fpFWPweNHhi6K_bdg"
+          "current_key": "AIzaSyA6vjVSaDw1cL2i4UpeIMvm0fYAZRVQyus"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1077899662339-mbmk4grm19jelgi1t56g91m4u7fp3135.apps.googleusercontent.com",
+              "client_id": "341316287916-vhmvfnlfcji1i77niacjbe6v78pfko5i.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

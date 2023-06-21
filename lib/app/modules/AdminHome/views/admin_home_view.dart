@@ -148,7 +148,7 @@ class AdminHomeView extends GetView<AdminHomeController> {
             Center(
               child: StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
-                    .collection('audioliteratur')
+                    .collection('literatur')
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {

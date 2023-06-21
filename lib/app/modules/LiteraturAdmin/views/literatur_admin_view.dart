@@ -51,7 +51,14 @@ class LiteraturAdminView extends GetView<LiteraturAdminController> {
           },
           child: Obx(() {
             if (controller.uploadedLiteratures.isEmpty) {
-              return Center(child: Text('No data available'));
+              return Center(
+                  child: Text(
+                'Tidak Ada Data Literatur',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                ),
+              ));
             } else {
               return ListView.builder(
                 itemCount: controller.uploadedLiteratures.length,
@@ -69,20 +76,22 @@ class LiteraturAdminView extends GetView<LiteraturAdminController> {
                         child: ListTile(
                           title: Text(
                             literature.title,
+                            overflow: TextOverflow.ellipsis,
                             style: GoogleFonts.poppins(
                               textStyle: const TextStyle(
                                 color: Colors.white,
-                                fontSize: 20,
+                                fontSize: 14,
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
                           ),
                           subtitle: Text(
                             literature.name,
+                            overflow: TextOverflow.ellipsis,
                             style: GoogleFonts.poppins(
                               textStyle: const TextStyle(
                                 color: Colors.white,
-                                fontSize: 16,
+                                fontSize: 12,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -101,8 +110,16 @@ class LiteraturAdminView extends GetView<LiteraturAdminController> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               GestureDetector(
-                                onTap: () {
-                                  // Tambahkan logika untuk mengedit literatur
+                                onTap: () async {
+                                  final updatedLiterature =
+                                      await getLiteratureData(
+                                          literature.documentId);
+                                  if (updatedLiterature != null) {
+                                    Get.toNamed(Routes.EDIT_LITERATUR,
+                                        arguments: updatedLiterature);
+                                  } else {
+                                    print('Tidak Ada Data');
+                                  }
                                 },
                                 child: Icon(
                                   Icons.edit,

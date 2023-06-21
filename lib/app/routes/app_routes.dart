@@ -21,6 +21,7 @@ abstract class Routes {
   static const LITERATUR_ADMIN = _Paths.LITERATUR_ADMIN;
   static const PENGELOLA = _Paths.PENGELOLA;
   static const ABOUT_US = _Paths.ABOUT_US;
+  static const EDIT_LITERATUR = _Paths.EDIT_LITERATUR;
 }
 
 abstract class _Paths {
@@ -41,4 +42,5 @@ abstract class _Paths {
   static const LITERATUR_ADMIN = '/literatur-admin';
   static const PENGELOLA = '/pengelola';
   static const ABOUT_US = '/about-us';
+  static const EDIT_LITERATUR = '/edit-literatur';
 }

@@ -10,6 +10,8 @@ import 'package:literasi_digital_tuna_netra/app/modules/AdminHome/bindings/admin
 import 'package:literasi_digital_tuna_netra/app/modules/AdminHome/views/admin_home_view.dart';
 import 'package:literasi_digital_tuna_netra/app/modules/ChangePassword/bindings/change_password_binding.dart';
 import 'package:literasi_digital_tuna_netra/app/modules/ChangePassword/views/change_password_view.dart';
+import 'package:literasi_digital_tuna_netra/app/modules/EditLiteratur/bindings/edit_literatur_binding.dart';
+import 'package:literasi_digital_tuna_netra/app/modules/EditLiteratur/views/edit_literatur_view.dart';
 import 'package:literasi_digital_tuna_netra/app/modules/EditProfile/bindings/edit_profile_binding.dart';
 import 'package:literasi_digital_tuna_netra/app/modules/EditProfile/views/edit_profile_view.dart';
 import 'package:literasi_digital_tuna_netra/app/modules/ForgetPassword/bindings/forget_password_binding.dart';
@@ -127,6 +129,11 @@ class AppPages {
       name: _Paths.ABOUT_US,
       page: () => AboutUsView(),
       binding: AboutUsBinding(),
+    ),
+    GetPage(
+      name: _Paths.EDIT_LITERATUR,
+      page: () => EditLiteraturView(),
+      binding: EditLiteraturBinding(),
     ),
   ];
 }

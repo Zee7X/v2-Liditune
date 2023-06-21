@@ -74,6 +74,10 @@ class AddPengelolaController extends GetxController {
                   isLoading.value = false;
                   Get.back();
                 },
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.blue),
+                ),
                 child: const Text(
                   "Tutup",
                   style: TextStyle(color: Colors.white),

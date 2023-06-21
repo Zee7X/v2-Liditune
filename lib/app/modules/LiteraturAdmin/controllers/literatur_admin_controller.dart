@@ -63,7 +63,7 @@ class LiteraturAdminController extends GetxController {
 
       if (confirmed == true) {
         await FirebaseFirestore.instance
-            .collection('audioliteratur')
+            .collection('literatur')
             .doc(documentId)
             .delete();
         print('Literatur deleted successfully');
@@ -73,7 +73,7 @@ class LiteraturAdminController extends GetxController {
           titleText: const Text(
             'Berhasil',
             style: TextStyle(
-              color: Colors.red,
+              color: Colors.green,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -109,7 +109,7 @@ class LiteraturAdminController extends GetxController {
   Future<void> fetchUploadedData() async {
     try {
       final snapshot =
-          await FirebaseFirestore.instance.collection('audioliteratur').get();
+          await FirebaseFirestore.instance.collection('literatur').get();
       final literatures = snapshot.docs
           .map((doc) => UploadedLiterature.fromDocumentSnapshot(doc, doc.id))
           .toList();
@@ -133,12 +133,36 @@ class LiteraturAdminController extends GetxController {
   }
 }
 
+Future<UploadedLiterature?> getLiteratureData(String? documentId) async {
+  try {
+    final snapshot = await FirebaseFirestore.instance
+        .collection('literatur')
+        .doc(documentId)
+        .get();
+    if (snapshot.exists) {
+      final data = snapshot.data() as Map<String, dynamic>;
+      return UploadedLiterature(
+        documentId: documentId ?? '',
+        name: data['name'],
+        title: data['title'],
+        imageUrl: data['imageUrl'],
+        audioUrl: data['audioUrl'],
+      );
+    } else {
+      print('Document does not exist');
+    }
+  } catch (e) {
+    print('Error fetching literature data: $e');
+  }
+  return null;
+}
+
 class UploadedLiterature {
   final String documentId;
-  final String name;
-  final String title;
-  final String imageUrl;
-  final String audioUrl;
+  late final String name;
+  late final String title;
+  late final String imageUrl;
+  late final String audioUrl;
   final AudioPlayer audioPlayer = AudioPlayer();
   bool isPlaying = false;
 

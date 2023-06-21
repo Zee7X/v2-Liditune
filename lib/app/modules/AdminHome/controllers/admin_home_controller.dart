@@ -40,7 +40,7 @@ class AdminHomeController extends GetxController {
               backgroundColor: Colors.red,
               shape: RoundedRectangleBorder(
                 borderRadius:
-                    BorderRadius.circular(8), // Set the button border radius
+                    BorderRadius.circular(8),
               ),
             ),
             onPressed: () async {
@@ -57,18 +57,11 @@ class AdminHomeController extends GetxController {
   Future<int> countDocuments() async {
     try {
       final snapshot =
-          await FirebaseFirestore.instance.collection('audioliteratur').get();
+          await FirebaseFirestore.instance.collection('literatur').get();
       return snapshot.size;
     } catch (e) {
       print('Error counting documents: $e');
       return 0;
     }
   }
-
-  // String getCurrentDateTimeText() {
-  //   initializeDateFormatting('id_ID', null);
-  //   final now = DateTime.now();
-  //   final formatter = DateFormat('EEEE, d MMMM y HH:mm', 'id_ID');
-  //   return formatter.format(now);
-  // }
 }
