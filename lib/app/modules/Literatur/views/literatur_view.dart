@@ -66,6 +66,7 @@ class LiteraturView extends GetView<LiteraturController> {
                                 child: Text(
                                   currentLiterature.title,
                                   textAlign: TextAlign.center,
+                                  overflow: TextOverflow.ellipsis,
                                   style: GoogleFonts.montserrat(
                                     textStyle: const TextStyle(
                                       color: Colors.white,
@@ -89,6 +90,7 @@ class LiteraturView extends GetView<LiteraturController> {
                                 child: Text(
                                   currentLiterature.name,
                                   textAlign: TextAlign.center,
+                                  overflow: TextOverflow.ellipsis,
                                   style: GoogleFonts.montserrat(
                                     textStyle: TextStyle(
                                       color: Colors.white.withOpacity(0.7),

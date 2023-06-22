@@ -138,20 +138,21 @@ class LiteraturAdminView extends GetView<LiteraturAdminController> {
                                 ),
                               ),
                               SizedBox(width: 16),
-                              IconButton(
-                                icon: literature.isPlaying
-                                    ? Icon(
-                                        Icons.stop,
-                                        color: Colors.white,
-                                      )
-                                    : Icon(
-                                        Icons.play_arrow,
-                                        color: Colors.white,
-                                      ),
-                                onPressed: () {
-                                  controller.playLiteratureAudio(literature);
-                                },
-                              ),
+                              Obx(() => IconButton(
+                                    icon: literature.isPlaying.value
+                                        ? Icon(
+                                            Icons.stop_circle_outlined,
+                                            color: Colors.white,
+                                          )
+                                        : Icon(
+                                            Icons.play_circle,
+                                            color: Colors.white,
+                                          ),
+                                    onPressed: () {
+                                      controller
+                                          .playLiteratureAudio(literature);
+                                    },
+                                  )),
                             ],
                           ),
                         ),

@@ -9,7 +9,8 @@ class LiteraturAdminController extends GetxController {
   Stream<List<UploadedLiterature>> get uploadedLiteraturesStream =>
       uploadedLiteratures.stream;
   final AudioPlayer audioPlayer = AudioPlayer();
-  UploadedLiterature currentPlayingLiterature = UploadedLiterature.empty();
+  Rx<UploadedLiterature?> currentPlayingLiterature =
+      Rx<UploadedLiterature?>(null);
 
   @override
   void onInit() {
@@ -18,8 +19,8 @@ class LiteraturAdminController extends GetxController {
   }
 
   Future<bool> onBackPressed() async {
-    if (currentPlayingLiterature.isPlaying) {
-      currentPlayingLiterature.stopAudio();
+    if (currentPlayingLiterature.value?.isPlaying.value == true) {
+      currentPlayingLiterature.value?.stopAudio();
       return false;
     }
     return true;
@@ -119,14 +120,69 @@ class LiteraturAdminController extends GetxController {
   }
 
   void playLiteratureAudio(UploadedLiterature literature) {
-    if (currentPlayingLiterature.isPlaying) {
-      currentPlayingLiterature.stopAudio();
+    if (currentPlayingLiterature.value?.isPlaying.value == true) {
+      currentPlayingLiterature.value?.stopAudio();
     }
     literature.playAudio();
-    currentPlayingLiterature = literature;
+    currentPlayingLiterature.value = literature;
     uploadedLiteratures.forEach((item) {
-      item.isPlaying = (item == literature);
+      item.isPlaying = (item == literature) as RxBool;
     });
+  }
+}
+
+class UploadedLiterature {
+  final String documentId;
+  late final String name;
+  late final String title;
+  late final String imageUrl;
+  late final String audioUrl;
+  final AudioPlayer audioPlayer = AudioPlayer();
+  RxBool isPlaying = RxBool(false);
+
+  UploadedLiterature({
+    required this.documentId,
+    required this.name,
+    required this.title,
+    required this.imageUrl,
+    required this.audioUrl,
+  });
+
+  UploadedLiterature.empty()
+      : documentId = '',
+        name = '',
+        title = '',
+        imageUrl = '',
+        audioUrl = '';
+
+  factory UploadedLiterature.fromDocumentSnapshot(
+      DocumentSnapshot doc, String documentId) {
+    final data = doc.data() as Map<String, dynamic>;
+    return UploadedLiterature(
+      documentId: documentId,
+      name: data['name'],
+      title: data['title'],
+      imageUrl: data['imageUrl'],
+      audioUrl: data['audioUrl'],
+    );
+  }
+
+  Future<void> playAudio() async {
+    try {
+      await audioPlayer.play(UrlSource(audioUrl));
+      isPlaying.value = true;
+    } catch (e) {
+      print('Error playing audio: $e');
+    }
+  }
+
+  Future<void> stopAudio() async {
+    try {
+      await audioPlayer.stop();
+      isPlaying.value = false;
+    } catch (e) {
+      print('Error stopping audio: $e');
+    }
   }
 }
 
@@ -152,60 +208,4 @@ Future<UploadedLiterature?> getLiteratureData(String? documentId) async {
     print('Error fetching literature data: $e');
   }
   return null;
-}
-
-class UploadedLiterature {
-  final String documentId;
-  late final String name;
-  late final String title;
-  late final String imageUrl;
-  late final String audioUrl;
-  final AudioPlayer audioPlayer = AudioPlayer();
-  bool isPlaying = false;
-
-  UploadedLiterature({
-    required this.documentId,
-    required this.name,
-    required this.title,
-    required this.imageUrl,
-    required this.audioUrl,
-  });
-
-  UploadedLiterature.empty()
-      : documentId = '',
-        name = '',
-        title = '',
-        imageUrl = '',
-        audioUrl = '',
-        isPlaying = false;
-
-  factory UploadedLiterature.fromDocumentSnapshot(
-      DocumentSnapshot doc, String documentId) {
-    final data = doc.data() as Map<String, dynamic>;
-    return UploadedLiterature(
-      documentId: documentId,
-      name: data['name'],
-      title: data['title'],
-      imageUrl: data['imageUrl'],
-      audioUrl: data['audioUrl'],
-    );
-  }
-
-  Future<void> playAudio() async {
-    try {
-      await audioPlayer.play(UrlSource(audioUrl));
-      isPlaying = true;
-    } catch (e) {
-      print('Error playing audio: $e');
-    }
-  }
-
-  Future<void> stopAudio() async {
-    try {
-      await audioPlayer.stop();
-      isPlaying = false;
-    } catch (e) {
-      print('Error stopping audio: $e');
-    }
-  }
 }

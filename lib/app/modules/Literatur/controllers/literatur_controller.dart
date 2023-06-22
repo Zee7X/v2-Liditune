@@ -117,8 +117,6 @@ class LiteraturController extends GetxController {
     } catch (e) {
       print('Error stopping audio: $e');
     }
-    speakText(
-        'Audio selesai. Silahkan pilih literatur lain atau putar ulang dengan menekan tombol bawah. Klik tombol atas untuk kembali ke home.');
   }
 
   void playNextLiterature() {
@@ -127,12 +125,11 @@ class LiteraturController extends GetxController {
       stopSpeaking();
       currentIndex++;
     } else {
-      currentIndex = 0 as RxInt;
+      currentIndex.value = 0;
     }
     final nextLiterature = uploadedLiteratures[currentIndex.value];
     speakText(
         'Literatur selanjutnya. Dengan Judul ${nextLiterature.title}, Karangan ${nextLiterature.name}. Klik tombol Bawah Untuk Putar');
-    // playLiteratureAudio(nextLiterature);
   }
 
   void playPreviousLiterature() {
@@ -141,13 +138,12 @@ class LiteraturController extends GetxController {
     if (currentIndex > 0) {
       currentIndex--;
     } else {
-      currentIndex = (uploadedLiteratures.length - 1) as RxInt;
+      currentIndex.value = uploadedLiteratures.length - 1;
     }
 
     final previousLiterature = uploadedLiteratures[currentIndex.value];
     speakText(
         'Literatur sebelumnya. Dengan Judul: ${previousLiterature.title}, Karangan ${previousLiterature.name}. Klik tombol Bawah Untuk Putar');
-    // playLiteratureAudio(previousLiterature);
   }
 }
 
