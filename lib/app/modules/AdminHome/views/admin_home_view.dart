@@ -24,7 +24,7 @@ class AdminHomeView extends GetView<AdminHomeController> {
           IconButton(
             icon: const Icon(Icons.settings_outlined),
             onPressed: () {
-              Get.toNamed(Routes.EDIT_PROFILE);
+              Get.toNamed(Routes.PROFILE);
             },
           ),
         ],

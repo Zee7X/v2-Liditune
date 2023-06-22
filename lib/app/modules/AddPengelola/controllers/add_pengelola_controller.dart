@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,13 +21,6 @@ class AddPengelolaController extends GetxController {
     if (selected.isNotEmpty) {
       genderC.text = selected.toString();
     }
-  }
-
-  void resetFields() {
-    namaC.clear();
-    emailC.clear();
-    noC.clear();
-    passC.clear();
   }
 
   Future<void> daftarUser() async {
@@ -130,10 +122,8 @@ class AddPengelolaController extends GetxController {
           borderWidth: 1,
           borderColor: Colors.grey.withOpacity(0.2),
         );
-        // print(e);
       }
     } else {
-      isLoading.value = false;
       Get.snackbar(
         "",
         "Isi semua data diri Anda!",

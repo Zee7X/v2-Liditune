@@ -24,7 +24,7 @@ class LoginController extends GetxController {
         if (userCredential.user != null) {
           if (userCredential.user!.emailVerified == true) {
             isLoading.value = false;
-            Get.toNamed(Routes.ADMIN_HOME);
+            Get.offAllNamed(Routes.ADMIN_HOME);
           } else {
             Get.defaultDialog(
               title: "Informasi",

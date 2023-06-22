@@ -25,7 +25,6 @@ class AddPengelolaView extends GetView<AddPengelolaController> {
           child: IconButton(
             onPressed: () {
               Get.back();
-              controller.resetFields();
             },
             icon: const Icon(
               Icons.arrow_back_ios_new,
@@ -193,7 +192,6 @@ class AddPengelolaView extends GetView<AddPengelolaController> {
                     onPressed: () async {
                       if (controller.isLoading.isFalse) {
                         await controller.daftarUser();
-                        controller.resetFields();
                       }
                     },
                     child: Rubik20(
