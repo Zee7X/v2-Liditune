@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import '../../../utils/rubik16.dart';
 import '../../../utils/rubik20.dart';
 import '../controllers/add_pengelola_controller.dart';
 
@@ -76,85 +75,157 @@ class AddPengelolaView extends GetView<AddPengelolaController> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Rubik16(
-                        text: 'Nama',
-                        fontsize: 12,
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 29.8,
-                        child: TextField(
-                          textInputAction: TextInputAction.next,
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                            10,
+                          ),
+                          color: Color(0xFF240B74),
+                        ),
+                        child: TextFormField(
+                          style: TextStyle(color: Colors.white),
                           controller: controller.namaC,
-                        ),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 15.5,
-                      ),
-                      Rubik16(
-                        text: 'Email',
-                        fontsize: 12,
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 29.8,
-                        child: TextField(
-                          textInputAction: TextInputAction.next,
-                          controller: controller.emailC,
-                        ),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 15.5,
-                      ),
-                      Rubik16(
-                        text: 'No Hp',
-                        fontsize: 12,
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 29.8,
-                        child: TextField(
-                          textInputAction: TextInputAction.next,
-                          controller: controller.noC,
-                        ),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 15.5,
-                      ),
-                      Rubik16(
-                        text: 'Jenis Kelamin',
-                        fontsize: 12,
-                      ),
-                      DropdownSearch<String>(
-                        items: const ["Laki - Laki", "Perempuan"],
-                        dropdownDecoratorProps: const DropDownDecoratorProps(
-                          dropdownSearchDecoration: InputDecoration(
-                            focusColor: Colors.blue,
+                          decoration: InputDecoration(
+                            labelText: 'Masukan Nama',
+                            labelStyle: TextStyle(color: Colors.white),
                             enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.black),
+                              borderSide: BorderSide(color: Colors.transparent),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.transparent),
+                            ),
+                            contentPadding: EdgeInsets.symmetric(
+                              vertical: 10,
+                              horizontal: 10,
                             ),
                           ),
                         ),
-                        popupProps: const PopupProps.menu(
-                          constraints: BoxConstraints(maxHeight: 100),
-                          showSearchBox: false,
-                          showSelectedItems: true,
+                      ),
+                      SizedBox(height: 16),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                            10,
+                          ),
+                          color: Color(0xFF240B74),
                         ),
-                        onChanged: (newValue) {
-                          controller.setSelected(newValue!);
-                        },
+                        child: TextFormField(
+                          style: TextStyle(color: Colors.white),
+                          controller: controller.emailC,
+                          decoration: InputDecoration(
+                            labelText: 'Masukan Email',
+                            labelStyle: TextStyle(color: Colors.white),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.transparent),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.transparent),
+                            ),
+                            contentPadding: EdgeInsets.symmetric(
+                              vertical: 10,
+                              horizontal: 10,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 16),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                            10,
+                          ),
+                          color: Color(0xFF240B74),
+                        ),
+                        child: TextFormField(
+                          style: TextStyle(color: Colors.white),
+                          controller: controller.noC,
+                          decoration: InputDecoration(
+                            labelText: 'Masukan No Hp',
+                            labelStyle: TextStyle(color: Colors.white),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.transparent),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.transparent),
+                            ),
+                            contentPadding: EdgeInsets.symmetric(
+                              vertical: 10,
+                              horizontal: 10,
+                            ),
+                          ),
+                        ),
                       ),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height / 15.5,
+                        height: 16,
                       ),
-                      Rubik16(
-                        text: 'Password',
-                        fontsize: 12,
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                            10,
+                          ),
+                          color: Color(0xFF240B74),
+                        ),
+                        child: DropdownSearch<String>(
+                          items: const ["Laki - Laki", "Perempuan"],
+                          dropdownDecoratorProps: DropDownDecoratorProps(
+                            baseStyle: TextStyle(color: Colors.white),
+                            dropdownSearchDecoration: InputDecoration(
+                              iconColor: Colors.white,
+                              labelText: "Pilih Jenis Kelamin",
+                              labelStyle: TextStyle(color: Colors.white),
+                              focusColor: Colors.transparent,
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                              ),
+                              contentPadding: EdgeInsets.symmetric(
+                                vertical: 10,
+                                horizontal: 10,
+                              ),
+                              fillColor: Colors.white,
+                              suffixIconColor: Colors.white,
+                            ),
+                          ),
+                          popupProps: const PopupProps.menu(
+                            constraints: BoxConstraints(maxHeight: 100),
+                            showSearchBox: false,
+                            showSelectedItems: true,
+                          ),
+                          onChanged: (newValue) {
+                            controller.setSelected(newValue!);
+                          },
+                        ),
                       ),
                       SizedBox(
-                        height: 30,
-                        child: Obx(
-                          () => TextField(
+                        height: 16,
+                      ),
+                      Obx(
+                        () => Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                              10,
+                            ),
+                            color: Color(0xFF240B74),
+                          ),
+                          child: TextField(
+                            style: TextStyle(color: Colors.white),
                             textInputAction: TextInputAction.done,
                             obscureText: controller.isPasswordHidden.value,
                             decoration: InputDecoration(
+                              labelText: 'Password',
+                              labelStyle: TextStyle(color: Colors.white),
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                              ),
+                              focusedBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.transparent),
+                              ),
+                              contentPadding: EdgeInsets.symmetric(
+                                vertical: 10,
+                                horizontal: 10,
+                              ),
                               suffixIcon: InkWell(
                                 onTap: () {
                                   controller.isPasswordHidden.value =
@@ -162,6 +233,7 @@ class AddPengelolaView extends GetView<AddPengelolaController> {
                                 },
                                 child: const Icon(
                                   Icons.remove_red_eye_outlined,
+                                  color: Colors.white,
                                 ),
                               ),
                             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../routes/app_pages.dart';
 import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
@@ -58,66 +59,62 @@ class ProfileView extends GetView<ProfileController> {
                   children: [
                     Center(
                       child: CircleAvatar(
-                        radius: 50,
+                        radius: 100,
                         child: Stack(
                           children: [
-                            // Profile image
                             if (userProfile['profileImg'].isNotEmpty)
                               ClipOval(
                                 child: Image.network(
                                   userProfile['profileImg'],
-                                  width: 100,
-                                  height: 100,
+                                  width: 200,
+                                  height: 200,
                                   fit: BoxFit.cover,
                                 ),
                               ),
-                            // Add/Edit image icon
                             Positioned(
                               bottom: 0,
-                              right: 0,
+                              right: 10,
                               child: GestureDetector(
                                 onTap: () {
                                   controller.pickImage();
                                 },
                                 child: CircleAvatar(
-                                  radius: 14,
-                                  backgroundColor: Colors.blue,
+                                  radius: 20,
+                                  backgroundColor: Color(0XFF15D863),
                                   child: Icon(
                                     Icons.edit,
                                     color: Colors.white,
-                                    size: 16,
+                                    size: 20,
                                   ),
                                 ),
                               ),
                             ),
-                            // Delete image icon
                             if (userProfile['profileImg'].isNotEmpty)
                               Positioned(
                                 bottom: 0,
-                                left: 0,
+                                left: 10,
                                 child: GestureDetector(
                                   onTap: () {
                                     controller.deleteImage();
                                   },
                                   child: CircleAvatar(
-                                    radius: 14,
-                                    backgroundColor: Colors.red,
+                                    radius: 20,
+                                    backgroundColor: Color(0XFFFF3589),
                                     child: Icon(
                                       Icons.delete,
                                       color: Colors.white,
-                                      size: 16,
+                                      size: 20,
                                     ),
                                   ),
                                 ),
                               ),
-                            // Initials placeholder
                             if (userProfile['profileImg'].isEmpty)
                               Center(
                                 child: Text(
                                   controller.getImagePlaceholder(
                                       controller.nameController.text),
                                   style: TextStyle(
-                                    fontSize: 24,
+                                    fontSize: 80,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -129,7 +126,7 @@ class ProfileView extends GetView<ProfileController> {
                     SizedBox(height: 16),
                     Container(
                       width: Get.width,
-                      height: Get.height / 1.9,
+                      height: Get.height / 2.1,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.white.withOpacity(0.8),
@@ -146,81 +143,135 @@ class ProfileView extends GetView<ProfileController> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'Name',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              ),
-                            ),
-                            TextField(
-                              controller: controller.nameController,
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                              decoration: InputDecoration(
-                                hintText: 'Enter your name',
-                              ),
-                            ),
-                            SizedBox(height: 16),
-                            Text(
-                              'Email',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              ),
-                            ),
-                            TextField(
-                              controller: controller.emailController,
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                              decoration: InputDecoration(
-                                hintText: 'Enter your email',
-                              ),
-                            ),
-                            SizedBox(height: 16),
-                            Text(
-                              'Phone',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              ),
-                            ),
-                            TextField(
-                              controller: controller.phoneController,
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                              decoration: InputDecoration(
-                                hintText: 'Enter your phone number',
-                              ),
-                            ),
-                            SizedBox(height: 16),
-                            Text(
-                              'Gender',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              ),
-                            ),
-                            TextField(
-                              controller: controller.genderController,
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                              decoration: InputDecoration(
-                                hintStyle: TextStyle(
-                                  color: Colors.black,
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  10,
                                 ),
-                                hintText: 'Enter your gender',
+                                color: Color(0xFF240B74),
+                              ),
+                              child: TextFormField(
+                                style: TextStyle(color: Colors.white),
+                                controller: controller.nameController,
+                                decoration: InputDecoration(
+                                  labelText: 'Nama',
+                                  labelStyle: TextStyle(color: Colors.white),
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.transparent),
+                                  ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.transparent),
+                                  ),
+                                  contentPadding: EdgeInsets.symmetric(
+                                    vertical: 10,
+                                    horizontal: 10,
+                                  ),
+                                ),
                               ),
                             ),
-                            SizedBox(height: Get.height / 17),
+                            SizedBox(height: 16),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  10,
+                                ),
+                                color: Color(0xFF240B74),
+                              ),
+                              child: TextFormField(
+                                style: TextStyle(color: Colors.white),
+                                controller: controller.emailController,
+                                decoration: InputDecoration(
+                                  labelText: 'Email',
+                                  labelStyle: TextStyle(color: Colors.white),
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.transparent),
+                                  ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.transparent),
+                                  ),
+                                  contentPadding: EdgeInsets.symmetric(
+                                    vertical: 10,
+                                    horizontal: 10,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 16),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  10,
+                                ),
+                                color: Color(0xFF240B74),
+                              ),
+                              child: TextFormField(
+                                style: TextStyle(color: Colors.white),
+                                controller: controller.phoneController,
+                                decoration: InputDecoration(
+                                  labelText: 'No Hp',
+                                  labelStyle: TextStyle(color: Colors.white),
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.transparent),
+                                  ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.transparent),
+                                  ),
+                                  contentPadding: EdgeInsets.symmetric(
+                                    vertical: 10,
+                                    horizontal: 10,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 16),
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  10,
+                                ),
+                                color: Color(0xFF240B74),
+                              ),
+                              child: TextFormField(
+                                style: TextStyle(color: Colors.white),
+                                controller: controller.genderController,
+                                decoration: InputDecoration(
+                                  labelText: 'Jenis Kelamin',
+                                  labelStyle: TextStyle(color: Colors.white),
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.transparent),
+                                  ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Colors.transparent),
+                                  ),
+                                  contentPadding: EdgeInsets.symmetric(
+                                    vertical: 10,
+                                    horizontal: 10,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Get.toNamed(Routes.CHANGE_PASSWORD);
+                              },
+                              child: RichText(
+                                text: TextSpan(
+                                  text: 'Ganti Password',
+                                  style: TextStyle(
+                                    decoration: TextDecoration.underline,
+                                    color: Colors.blue,
+                                  ),
+                                ),
+                              ),
+                            ),
                             Center(
                               child: Container(
                                 width: Get.width / 2,

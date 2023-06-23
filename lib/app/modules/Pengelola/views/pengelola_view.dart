@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:literasi_digital_tuna_netra/app/routes/app_pages.dart';
 
 import '../controllers/pengelola_controller.dart';
@@ -96,22 +97,40 @@ class PengelolaView extends GetView<PengelolaController> {
                             children: [
                               Text(
                                 pengelola.nama,
-                                style: TextStyle(
-                                  overflow: TextOverflow.ellipsis,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
+                                style: GoogleFonts.montserrat(
+                                  textStyle: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w700,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                                 ),
                               ),
                               RichText(
                                 text: TextSpan(
                                   text: pengelola.email,
-                                  style: TextStyle(
-                                    decoration: TextDecoration.underline,
-                                    color: Colors.black,
+                                  style: GoogleFonts.montserrat(
+                                    textStyle: const TextStyle(
+                                      overflow: TextOverflow.clip,
+                                      decoration: TextDecoration.underline,
+                                      color: Colors.black,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                 ),
                               ),
-                              Text(pengelola.no),
+                              Text(
+                                pengelola.no,
+                                style: GoogleFonts.montserrat(
+                                  textStyle: const TextStyle(
+                                    overflow: TextOverflow.clip,
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),

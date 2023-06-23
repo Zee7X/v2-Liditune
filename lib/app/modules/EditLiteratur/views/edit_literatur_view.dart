@@ -72,7 +72,7 @@ class EditLiteraturView extends GetView<EditLiteraturController> {
                           height: Get.height / 18,
                           alignment: Alignment.centerLeft,
                           decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
+                            border: Border.all(color: Color(0xFF240B74)),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Padding(
@@ -110,7 +110,7 @@ class EditLiteraturView extends GetView<EditLiteraturController> {
                           height: Get.height / 18,
                           alignment: Alignment.centerLeft,
                           decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
+                            border: Border.all(color: Color(0xFF240B74)),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Padding(
