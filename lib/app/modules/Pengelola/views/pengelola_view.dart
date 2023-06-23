@@ -54,125 +54,146 @@ class PengelolaView extends GetView<PengelolaController> {
             }
 
             return ListView.builder(
-                itemCount: controller.pengelolaList.length,
-                itemBuilder: (context, index) {
-                  Pengelola pengelola = controller.pengelolaList[index];
-                  return Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: Container(
-                      width: 337,
-                      height: 149,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
+              itemCount: controller.pengelolaList.length,
+              itemBuilder: (context, index) {
+                Pengelola pengelola = controller.pengelolaList[index];
+                return Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Container(
+                    width: 337,
+                    height: 149,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ClipOval(
                             child: CircleAvatar(
                               radius: 60,
-                              child: Text(
-                                pengelola.nama.substring(0, 1),
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              backgroundColor: Colors.blue,
-                            ),
-                          ),
-                          Container(
-                            height: Get.height / 8,
-                            width: Get.width / 2.2,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  pengelola.nama,
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                RichText(
-                                  text: TextSpan(
-                                    text: pengelola.email,
-                                    style: TextStyle(
-                                      decoration: TextDecoration.underline,
-                                      color: Colors.black,
+                              backgroundImage: pengelola.profileImg.isNotEmpty
+                                  ? NetworkImage(pengelola.profileImg)
+                                  : null,
+                              child: pengelola.profileImg.isNotEmpty
+                                  ? null
+                                  : Text(
+                                      pengelola.getInitials(),
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 32),
                                     ),
-                                  ),
-                                ),
-                                Text(pengelola.no),
-                              ],
+                              backgroundColor: Color(0XFFFF820E),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  height: 40,
-                                  width: 40,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12),
-                                    color: Colors.green,
-                                  ),
-                                  child: IconButton(
-                                    icon: Icon(Icons.edit),
-                                    onPressed: () {
-                                      // Panggil fungsi edit pengelola
-                                      // Misalnya: pengelolaController.editPengelola(pengelola.documentId);
-                                    },
+                        ),
+                        Container(
+                          height: Get.height / 8,
+                          width: Get.width / 2.2,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                pengelola.nama,
+                                style: TextStyle(
+                                  overflow: TextOverflow.ellipsis,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              RichText(
+                                text: TextSpan(
+                                  text: pengelola.email,
+                                  style: TextStyle(
+                                    decoration: TextDecoration.underline,
+                                    color: Colors.black,
                                   ),
                                 ),
-                                SizedBox(height: 5),
-                                Container(
-                                  height: 40,
-                                  width: 40,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12),
-                                    color: Colors.red,
+                              ),
+                              Text(pengelola.no),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: 40,
+                                width: 40,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12),
+                                  color: Color(0XFF15D863),
+                                ),
+                                child: IconButton(
+                                  icon: Icon(
+                                    Icons.edit,
+                                    color: Colors.white,
                                   ),
-                                  child: IconButton(
-                                    icon: Icon(Icons.delete),
-                                    onPressed: () {
-                                      showDialog(
-                                        context: context,
-                                        builder: (context) => AlertDialog(
-                                          title: Text('Konfirmasi Hapus'),
-                                          content: Text(
-                                              'Yakin ingin menghapus pengelola?'),
-                                          actions: [
-                                            TextButton(
-                                              child: Text('Batal'),
-                                              onPressed: () {
-                                                Navigator.pop(context);
-                                              },
-                                            ),
-                                            TextButton(
-                                              child: Text('Hapus'),
-                                              onPressed: () {
-                                                // Panggil fungsi hapus pengelola
-                                                controller.deletePengelola(
-                                                    pengelola.documentId);
-                                                Navigator.pop(context);
-                                              },
-                                            ),
-                                          ],
-                                        ),
+                                  onPressed: () async {
+                                    final updatedPengelola =
+                                        await getPengelolaData(
+                                            pengelola.documentId);
+                                    if (updatedPengelola != null) {
+                                      Get.toNamed(
+                                        Routes.EDIT_PROFILE,
+                                        arguments: updatedPengelola,
                                       );
-                                    },
-                                  ),
+                                    } else {
+                                      print('Tidak Ada Data');
+                                    }
+                                  },
                                 ),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
+                              ),
+                              SizedBox(height: 5),
+                              Container(
+                                height: 40,
+                                width: 40,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12),
+                                  color: Color(0XFFFF3589),
+                                ),
+                                child: IconButton(
+                                  icon: Icon(Icons.delete, color: Colors.white),
+                                  onPressed: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        title: Text('Konfirmasi Hapus'),
+                                        content: Text(
+                                            'Yakin ingin menghapus pengelola?'),
+                                        actions: [
+                                          TextButton(
+                                            child: Text('Batal'),
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                          ),
+                                          TextButton(
+                                            child: Text('Hapus'),
+                                            onPressed: () {
+                                              controller.deletePengelola(
+                                                  pengelola.documentId);
+                                              Navigator.pop(context);
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
                     ),
-                  );
-                });
+                  ),
+                );
+              },
+            );
           },
         ),
       ),

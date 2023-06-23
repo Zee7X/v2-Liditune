@@ -57,8 +57,6 @@ class ProfileController extends GetxController {
 
         if (snapshot.exists) {
           Map<String, dynamic>? newProfile = snapshot.data();
-
-          // Check if the retrieved profile belongs to the current user
           if (newProfile != null && newProfile['email'] == user.email) {
             if (newProfile != userProfile.value) {
               userProfile.value = newProfile;
@@ -72,7 +70,6 @@ class ProfileController extends GetxController {
         }
       }
     } catch (e) {
-      // Handle any exceptions
     } finally {
       isLoading.value = false;
     }
@@ -85,8 +82,9 @@ class ProfileController extends GetxController {
 
       if (user != null) {
         if (_validateInputs()) {
-          String imageUrl = '';
-          if (profileImageUrl.isNotEmpty) {
+          String imageUrl = userProfile.value?['profileImg'] ?? '';
+
+          if (profileImageUrl.isNotEmpty && profileImageUrl != imageUrl) {
             final file = File(profileImageUrl);
             imageUrl = await _uploadProfileImage(file, user.uid);
           }
@@ -255,15 +253,22 @@ class ProfileController extends GetxController {
     try {
       User? user = _auth.currentUser;
 
-      if (user != null && profileImageUrl.isNotEmpty) {
-        String imageUrl =
-            await _uploadProfileImage(File(profileImageUrl), user.uid);
+      if (user != null) {
+        String imageUrl = '';
+
+        if (profileImageUrl.isNotEmpty) {
+          final file = File(profileImageUrl);
+          imageUrl = await _uploadProfileImage(file, user.uid);
+        } else {
+          imageUrl = userProfile.value?['profileImg'] ?? '';
+        }
 
         await _firestore.collection("pengelola").doc(user.uid).update({
           "profileImg": imageUrl,
         });
 
         profileImageUrl = imageUrl;
+
         userProfile.update((value) {
           if (value != null && value['uid'] == user.uid) {
             value['profileImg'] = imageUrl;
@@ -318,6 +323,7 @@ class ProfileController extends GetxController {
         });
 
         profileImageUrl = "";
+
         userProfile.update((value) {
           if (value != null && value['uid'] == user.uid) {
             value['profileImg'] = "";

@@ -70,8 +70,6 @@ class PengelolaController extends GetxController {
       );
     }
   }
-
-  // Tambahkan fungsi edit pengelola di sini
 }
 
 class Pengelola {
@@ -106,9 +104,19 @@ class Pengelola {
       email: data['email'],
     );
   }
+
+  String getInitials() {
+    List<String> nameParts = nama.split(' ');
+    if (nameParts.length >= 2) {
+      return nameParts[0][0].toUpperCase() + nameParts[1][0].toUpperCase();
+    } else if (nameParts.length == 1) {
+      return nameParts[0][0].toUpperCase();
+    } else {
+      return '';
+    }
+  }
 }
 
-// Fungsi untuk mendapatkan data pengelola berdasarkan documentId
 Future<Pengelola?> getPengelolaData(String? documentId) async {
   try {
     final snapshot = await FirebaseFirestore.instance
@@ -130,7 +138,7 @@ Future<Pengelola?> getPengelolaData(String? documentId) async {
       print('Document does not exist');
     }
   } catch (e) {
-    print('Error fetching pengelola data: $e');
+    print('Error fetching literature data: $e');
   }
   return null;
 }

@@ -25,7 +25,6 @@ class EditLiteraturController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // Mengisi data yang ada ke dalam form
     final literature = Get.arguments as UploadedLiterature;
     title.value = literature.title;
     name.value = literature.name;
@@ -97,14 +96,10 @@ class EditLiteraturController extends GetxController {
       }
     }
 
-    UploadedLiterature?
-        literature; // Declare as nullable and assign initial value
+    UploadedLiterature? literature;
 
     try {
-      // Retrieve the actual value of literature from Get.arguments
       literature = Get.arguments as UploadedLiterature;
-
-      // Melakukan update data di Firebase Firestore
       await FirebaseFirestore.instance
           .collection('literatur')
           .doc(literature.documentId)

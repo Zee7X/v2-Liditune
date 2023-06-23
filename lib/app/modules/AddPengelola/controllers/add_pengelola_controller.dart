@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:literasi_digital_tuna_netra/app/modules/Pengelola/controllers/pengelola_controller.dart';
 
 class AddPengelolaController extends GetxController {
   RxBool isLoading = false.obs;
@@ -51,6 +52,7 @@ class AddPengelolaController extends GetxController {
 
           await userCredential.user!.sendEmailVerification();
           Get.back();
+          Get.find<PengelolaController>().fetchPengelolaData();
 
           Get.defaultDialog(
             title: "Berhasil",
