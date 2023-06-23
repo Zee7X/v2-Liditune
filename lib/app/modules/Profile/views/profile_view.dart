@@ -36,10 +36,17 @@ class ProfileView extends GetView<ProfileController> {
           () {
             final currentUser = controller.currentUser.value;
             final userProfile = controller.userProfile.value;
+            final isLoading = controller.isLoading.value;
 
             if (currentUser == null || userProfile == null) {
               return Center(
-                child: Text('Tidak Ada Data Profile'),
+                child: Text(''),
+              );
+            }
+
+            if (isLoading) {
+              return Center(
+                child: CircularProgressIndicator(),
               );
             }
 

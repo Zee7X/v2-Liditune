@@ -34,6 +34,7 @@ import 'package:literasi_digital_tuna_netra/app/modules/ScanQr/bindings/scan_qr_
 import 'package:literasi_digital_tuna_netra/app/modules/ScanQr/views/scan_qr_view.dart';
 import 'package:literasi_digital_tuna_netra/app/modules/SplashScreen/bindings/splash_screen_binding.dart';
 import 'package:literasi_digital_tuna_netra/app/modules/SplashScreen/views/splash_screen_view.dart';
+
 import 'package:literasi_digital_tuna_netra/app/modules/home/bindings/home_binding.dart';
 import 'package:literasi_digital_tuna_netra/app/modules/home/views/home_view.dart';
 

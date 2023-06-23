@@ -24,12 +24,10 @@ class ProfileController extends GetxController {
 
   String getImagePlaceholder(String name) {
     if (name.isEmpty) return '';
-
     List<String> names = name.split(' ');
     String initials = '';
     int maxInitials = 2;
     int count = 0;
-
     for (String n in names) {
       if (n.isNotEmpty) {
         initials += n[0].toUpperCase();
@@ -37,7 +35,6 @@ class ProfileController extends GetxController {
         if (count == maxInitials) break;
       }
     }
-
     return initials;
   }
 
@@ -60,17 +57,22 @@ class ProfileController extends GetxController {
 
         if (snapshot.exists) {
           Map<String, dynamic>? newProfile = snapshot.data();
-          if (newProfile != userProfile.value) {
-            userProfile.value = newProfile;
-            nameController.text = userProfile.value!['nama'];
-            emailController.text = userProfile.value!['email'];
-            phoneController.text = userProfile.value!['no'];
-            genderController.text = userProfile.value!['gender'];
-            profileImageUrl = userProfile.value!['profileImg'];
+
+          // Check if the retrieved profile belongs to the current user
+          if (newProfile != null && newProfile['email'] == user.email) {
+            if (newProfile != userProfile.value) {
+              userProfile.value = newProfile;
+              nameController.text = userProfile.value!['nama'];
+              emailController.text = userProfile.value!['email'];
+              phoneController.text = userProfile.value!['no'];
+              genderController.text = userProfile.value!['gender'];
+              profileImageUrl = userProfile.value!['profileImg'];
+            }
           }
         }
       }
     } catch (e) {
+      // Handle any exceptions
     } finally {
       isLoading.value = false;
     }
@@ -127,7 +129,7 @@ class ProfileController extends GetxController {
           }
 
           userProfile.update((value) {
-            if (value != null) {
+            if (value != null && value['uid'] == _auth.currentUser?.uid) {
               value['nama'] = nameController.text;
               value['email'] = emailController.text;
               value['no'] = phoneController.text;
@@ -135,7 +137,6 @@ class ProfileController extends GetxController {
               value['profileImg'] = imageUrl;
             }
           });
-
           Get.snackbar(
             "",
             "Profil Berhasil Diubah",
@@ -234,7 +235,9 @@ class ProfileController extends GetxController {
   }
 
   void setProfileImage(File file) {
-    profileImageUrl = file.path;
+    if (_auth.currentUser != null) {
+      profileImageUrl = file.path;
+    }
   }
 
   Future<String> _uploadProfileImage(File file, String userId) async {
@@ -245,6 +248,60 @@ class ProfileController extends GetxController {
       return await snapshot.ref.getDownloadURL();
     } catch (e) {
       throw Exception('Failed to upload profile image.');
+    }
+  }
+
+  Future<void> updateProfileImage() async {
+    try {
+      User? user = _auth.currentUser;
+
+      if (user != null && profileImageUrl.isNotEmpty) {
+        String imageUrl =
+            await _uploadProfileImage(File(profileImageUrl), user.uid);
+
+        await _firestore.collection("pengelola").doc(user.uid).update({
+          "profileImg": imageUrl,
+        });
+
+        profileImageUrl = imageUrl;
+        userProfile.update((value) {
+          if (value != null && value['uid'] == user.uid) {
+            value['profileImg'] = imageUrl;
+          }
+        });
+
+        Get.snackbar(
+          "",
+          "Profile Image Berhasil Diperbarui.",
+          titleText: const Text(
+            'Success',
+            style: TextStyle(
+              color: Colors.green,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          backgroundColor: Color(0Xff252835),
+          colorText: Colors.white,
+          borderWidth: 1,
+          borderColor: Colors.grey.withOpacity(0.2),
+        );
+      }
+    } catch (e) {
+      Get.snackbar(
+        "",
+        "Failed to update profile image.",
+        titleText: const Text(
+          'Error',
+          style: TextStyle(
+            color: Colors.red,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: Color(0Xff252835),
+        colorText: Colors.white,
+        borderWidth: 1,
+        borderColor: Colors.grey.withOpacity(0.2),
+      );
     }
   }
 
@@ -262,7 +319,7 @@ class ProfileController extends GetxController {
 
         profileImageUrl = "";
         userProfile.update((value) {
-          if (value != null) {
+          if (value != null && value['uid'] == user.uid) {
             value['profileImg'] = "";
           }
         });
