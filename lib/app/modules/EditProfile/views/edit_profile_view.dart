@@ -1,4 +1,6 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../Pengelola/controllers/pengelola_controller.dart';
@@ -11,7 +13,7 @@ class EditProfileView extends GetView<EditProfileController> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
-        title: Text('Edit Profile'),
+        title: Text('Edit Pengelola'),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new),
@@ -40,10 +42,10 @@ class EditProfileView extends GetView<EditProfileController> {
             padding: const EdgeInsets.all(20.0),
             child: Container(
               width: Get.width,
-              height: Get.height / 2.7,
+              height: Get.height / 2.8,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Colors.white.withOpacity(0.8),
+                color: Colors.white,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.2),
@@ -56,100 +58,146 @@ class EditProfileView extends GetView<EditProfileController> {
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                          10,
-                        ),
+                    TextFormField(
+                      onChanged: (value) {
+                        controller.nama.value = value;
+                      },
+                      initialValue: controller.nama.value,
+                      style: TextStyle(
                         color: Color(0xFF240B74),
                       ),
-                      child: TextFormField(
-                        onChanged: (value) {
-                          controller.nama.value = value;
-                        },
-                        initialValue: controller.nama.value,
-                        style: TextStyle(color: Colors.white),
-                        decoration: InputDecoration(
-                          labelText: 'Nama',
-                          labelStyle: TextStyle(color: Colors.white),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.transparent),
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.person,
+                          color: Color(0xFF240B74),
+                        ),
+                        hintText: 'Masukan Nama',
+                        hintStyle: TextStyle(
+                          color: Color(0xFF240B74),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            color: Color(0xFF240B74),
+                            width: 1,
                           ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.transparent),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            color: Color(0xFF240B74),
+                            width: 1,
                           ),
-                          contentPadding: EdgeInsets.symmetric(
-                            vertical: 10,
-                            horizontal: 10,
-                          ),
+                        ),
+                        contentPadding: EdgeInsets.symmetric(
+                          vertical: 10,
+                          horizontal: 10,
                         ),
                       ),
                     ),
                     SizedBox(height: 16.0),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                          10,
+                    TextFormField(
+                      onChanged: (value) {
+                        controller.no.value = value;
+                      },
+                      initialValue: controller.no.value,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(
+                          RegExp(r'[0-9]'),
                         ),
+                      ],
+                      keyboardType: TextInputType.phone,
+                      style: TextStyle(
                         color: Color(0xFF240B74),
                       ),
-                      child: TextFormField(
-                        onChanged: (value) {
-                          controller.gender.value = value;
-                        },
-                        initialValue: controller.gender.value,
-                        style: TextStyle(color: Colors.white),
-                        decoration: InputDecoration(
-                          labelText: 'Jenis Kelamin',
-                          labelStyle: TextStyle(color: Colors.white),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.transparent),
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.phone_android,
+                          color: Color(0xFF240B74),
+                        ),
+                        hintText: 'Masukan No Hp',
+                        hintStyle: TextStyle(
+                          color: Color(0xFF240B74),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            color: Color(0xFF240B74),
+                            width: 1,
                           ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.transparent),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            color: Color(0xFF240B74),
+                            width: 1,
                           ),
-                          contentPadding: EdgeInsets.symmetric(
-                            vertical: 10,
-                            horizontal: 10,
-                          ),
+                        ),
+                        contentPadding: EdgeInsets.symmetric(
+                          vertical: 10,
+                          horizontal: 10,
                         ),
                       ),
                     ),
                     SizedBox(height: 16.0),
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                          10,
+                    DropdownSearch<String>(
+                      items: const ["Laki - Laki", "Perempuan"],
+                      dropdownDecoratorProps: DropDownDecoratorProps(
+                        baseStyle: TextStyle(
+                          color: Color(0xFF240B74),
                         ),
-                        color: Color(0xFF240B74),
-                      ),
-                      child: TextFormField(
-                        onChanged: (value) {
-                          controller.no.value = value;
-                        },
-                        initialValue: controller.no.value,
-                        style: TextStyle(color: Colors.white),
-                        decoration: InputDecoration(
-                          labelText: 'No Hp',
-                          labelStyle: TextStyle(color: Colors.white),
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.transparent),
+                        dropdownSearchDecoration: InputDecoration(
+                          prefixIcon: Icon(
+                            Icons.male,
+                            color: Color(0xFF240B74),
                           ),
-                          focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.transparent),
+                          iconColor: Color(0xFF240B74),
+                          focusColor: Colors.transparent,
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(
+                              color: Color(0xFF240B74),
+                              width: 1,
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(
+                              color: Color(0xFF240B74),
+                              width: 1,
+                            ),
                           ),
                           contentPadding: EdgeInsets.symmetric(
                             vertical: 10,
                             horizontal: 10,
                           ),
+                          fillColor: Colors.white,
+                          suffixIconColor: Color(0xFF240B74),
                         ),
                       ),
+                      popupProps: const PopupProps.menu(
+                        constraints: BoxConstraints(maxHeight: 100),
+                        showSearchBox: false,
+                        showSelectedItems: true,
+                      ),
+                      selectedItem: controller.gender.value,
+                      onChanged: (newValue) {
+                        controller.setSelected(newValue!);
+                      },
                     ),
                     SizedBox(height: 30.0),
                     Center(
                       child: Container(
-                        width: Get.width / 2,
-                        height: Get.height / 18,
+                        width: 269,
+                        height: 45,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [Color(0xFF6658FB), Color(0xFF8C58FB)],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
                         child: ElevatedButton(
                           onPressed: () {
                             controller.updateProfile(pengelola.documentId);
@@ -162,7 +210,7 @@ class EditProfileView extends GetView<EditProfileController> {
                           ),
                           style: ElevatedButton.styleFrom(
                             foregroundColor: Colors.white,
-                            backgroundColor: Color(0xFF240B74),
+                            backgroundColor: Colors.transparent,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
                             ),

@@ -47,7 +47,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
               ),
               child: Container(
                 width: MediaQuery.of(context).size.width / 1.1,
-                height: MediaQuery.of(context).size.height / 2.4,
+                height: MediaQuery.of(context).size.height / 2.7,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(
@@ -67,159 +67,195 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Obx(() => Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                10,
-                              ),
+                      Obx(
+                        () => TextField(
+                          style: TextStyle(
+                            color: Color(0xFF240B74),
+                          ),
+                          obscureText: controller.isPasswordHidden.value,
+                          textInputAction: TextInputAction.next,
+                          controller: controller.lamaC,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.lock_outline,
                               color: Color(0xFF240B74),
                             ),
-                            child: TextField(
-                              style: TextStyle(color: Colors.white),
-                              obscureText: controller.isPasswordHidden.value,
-                              textInputAction: TextInputAction.next,
-                              controller: controller.lamaC,
-                              decoration: InputDecoration(
-                                labelText: 'Masukan Password Lama',
-                                labelStyle: TextStyle(color: Colors.white),
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.transparent),
-                                ),
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.transparent),
-                                ),
-                                contentPadding: EdgeInsets.symmetric(
-                                  vertical: 10,
-                                  horizontal: 10,
-                                ),
-                                suffixIcon: InkWell(
-                                  onTap: () {
-                                    controller.isPasswordHidden.value =
-                                        !controller.isPasswordHidden.value;
-                                  },
-                                  child: Icon(
-                                    color: Colors.white,
-                                    Icons.remove_red_eye_outlined,
-                                  ),
-                                ),
+                            hintText: 'Masukan Password Lama',
+                            hintStyle: TextStyle(
+                              color: Color(0xFF240B74),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                color: Color(0xFF240B74),
+                                width: 1,
                               ),
                             ),
-                          )),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                color: Color(0xFF240B74),
+                                width: 1,
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.symmetric(
+                              vertical: 10,
+                              horizontal: 10,
+                            ),
+                            suffixIcon: InkWell(
+                              onTap: () {
+                                controller.isPasswordHidden.value =
+                                    !controller.isPasswordHidden.value;
+                              },
+                              child: Icon(
+                                color: Color(0xFF240B74),
+                                Icons.remove_red_eye_outlined,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                       SizedBox(
                         height: 16,
                       ),
-                      Obx(() => Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                10,
-                              ),
+                      Obx(
+                        () => TextField(
+                          style: TextStyle(
+                            color: Color(0xFF240B74),
+                          ),
+                          obscureText: controller.isPasswordHidden1.value,
+                          textInputAction: TextInputAction.next,
+                          controller: controller.baruC,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.lock_clock_outlined,
                               color: Color(0xFF240B74),
                             ),
-                            child: TextField(
-                              style: TextStyle(color: Colors.white),
-                              obscureText: controller.isPasswordHidden1.value,
-                              textInputAction: TextInputAction.next,
-                              controller: controller.baruC,
-                              decoration: InputDecoration(
-                                labelText: 'Masukan Password Baru',
-                                labelStyle: TextStyle(color: Colors.white),
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.transparent),
-                                ),
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.transparent),
-                                ),
-                                contentPadding: EdgeInsets.symmetric(
-                                  vertical: 10,
-                                  horizontal: 10,
-                                ),
-                                suffixIcon: InkWell(
-                                  onTap: () {
-                                    controller.isPasswordHidden1.value =
-                                        !controller.isPasswordHidden1.value;
-                                  },
-                                  child: Icon(
-                                    color: Colors.white,
-                                    Icons.remove_red_eye_outlined,
-                                  ),
-                                ),
+                            hintText: 'Masukan Password Baru',
+                            hintStyle: TextStyle(
+                              color: Color(0xFF240B74),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                color: Color(0xFF240B74),
+                                width: 1,
                               ),
                             ),
-                          )),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                color: Color(0xFF240B74),
+                                width: 1,
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.symmetric(
+                              vertical: 10,
+                              horizontal: 10,
+                            ),
+                            suffixIcon: InkWell(
+                              onTap: () {
+                                controller.isPasswordHidden1.value =
+                                    !controller.isPasswordHidden1.value;
+                              },
+                              child: Icon(
+                                color: Color(0xFF240B74),
+                                Icons.remove_red_eye_outlined,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                       SizedBox(
                         height: 16,
                       ),
-                      Obx(() => Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                10,
-                              ),
+                      Obx(
+                        () => TextField(
+                          style: TextStyle(
+                            color: Color(0xFF240B74),
+                          ),
+                          obscureText: controller.isPasswordHidden2.value,
+                          textInputAction: TextInputAction.next,
+                          controller: controller.konfirmC,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.lock_reset_rounded,
                               color: Color(0xFF240B74),
                             ),
-                            child: TextField(
-                              style: TextStyle(color: Colors.white),
-                              obscureText: controller.isPasswordHidden2.value,
-                              textInputAction: TextInputAction.next,
-                              controller: controller.konfirmC,
-                              decoration: InputDecoration(
-                                labelText: 'Konfirmasi Password Baru',
-                                labelStyle: TextStyle(color: Colors.white),
-                                enabledBorder: UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.transparent),
+                            hintText: 'Konfirmasi Password Baru',
+                            hintStyle: TextStyle(
+                              color: Color(0xFF240B74),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                color: Color(0xFF240B74),
+                                width: 1,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                color: Color(0xFF240B74),
+                                width: 1,
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.symmetric(
+                              vertical: 10,
+                              horizontal: 10,
+                            ),
+                            suffixIcon: InkWell(
+                              onTap: () {
+                                controller.isPasswordHidden2.value =
+                                    !controller.isPasswordHidden2.value;
+                              },
+                              child: Icon(
+                                color: Color(0xFF240B74),
+                                Icons.remove_red_eye_outlined,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Obx(() => Center(
+                            child: Container(
+                              width: 269,
+                              height: 45,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color(0xFF6658FB),
+                                    Color(0xFF8C58FB)
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
                                 ),
-                                focusedBorder: UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.transparent),
-                                ),
-                                contentPadding: EdgeInsets.symmetric(
-                                  vertical: 10,
-                                  horizontal: 10,
-                                ),
-                                suffixIcon: InkWell(
-                                  onTap: () {
-                                    controller.isPasswordHidden2.value =
-                                        !controller.isPasswordHidden2.value;
-                                  },
-                                  child: Icon(
-                                    color: Colors.white,
-                                    Icons.remove_red_eye_outlined,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  foregroundColor: Colors.white,
+                                  backgroundColor: Colors.transparent,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
                                   ),
                                 ),
+                                onPressed: () async {
+                                  if (controller.isLoading.isFalse) {
+                                    controller.updatePass();
+                                  }
+                                },
+                                child: Rubik20(
+                                  text: controller.isLoading.isFalse
+                                      ? 'Simpan'
+                                      : 'Loading ...',
+                                  fontweight: FontWeight.w500,
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
-                          )),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 13.5,
-                      ),
-                      Obx(() => ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              elevation: 2,
-                              shadowColor: Colors.black,
-                              backgroundColor: Color(0xFF240B74),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25),
-                              ),
-                              minimumSize: Size(
-                                Get.width,
-                                MediaQuery.of(context).size.height / 16.2,
-                              ),
-                            ),
-                            onPressed: () async {
-                              if (controller.isLoading.isFalse) {
-                                controller.updatePass();
-                              }
-                            },
-                            child: Rubik20(
-                              text: controller.isLoading.isFalse
-                                  ? 'Simpan'
-                                  : 'Loading ...',
-                              fontweight: FontWeight.w500,
-                              color: Colors.white,
                             ),
                           )),
                     ],

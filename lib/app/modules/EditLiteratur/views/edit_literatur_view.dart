@@ -49,7 +49,7 @@ class EditLiteraturView extends GetView<EditLiteraturController> {
               width: Get.width,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Colors.white.withOpacity(0.8),
+                color: Colors.white,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.2),
@@ -80,7 +80,10 @@ class EditLiteraturView extends GetView<EditLiteraturController> {
                                 const EdgeInsets.symmetric(horizontal: 8.0),
                             child: Row(
                               children: [
-                                Icon(Icons.image),
+                                Icon(
+                                  Icons.image,
+                                  color: Color(0xFF240B74),
+                                ),
                                 SizedBox(width: 8),
                                 Expanded(
                                   child: Text(
@@ -90,6 +93,7 @@ class EditLiteraturView extends GetView<EditLiteraturController> {
                                     style: TextStyle(
                                       overflow: TextOverflow.ellipsis,
                                       fontSize: 14,
+                                      color: Color(0xFF240B74),
                                     ),
                                   ),
                                 ),
@@ -118,7 +122,10 @@ class EditLiteraturView extends GetView<EditLiteraturController> {
                                 const EdgeInsets.symmetric(horizontal: 8.0),
                             child: Row(
                               children: [
-                                Icon(Icons.audio_file),
+                                Icon(
+                                  Icons.audio_file,
+                                  color: Color(0xFF240B74),
+                                ),
                                 SizedBox(width: 8),
                                 Expanded(
                                   child: Text(
@@ -128,6 +135,7 @@ class EditLiteraturView extends GetView<EditLiteraturController> {
                                     style: TextStyle(
                                       overflow: TextOverflow.ellipsis,
                                       fontSize: 14,
+                                      color: Color(0xFF240B74),
                                     ),
                                   ),
                                 ),
@@ -141,15 +149,24 @@ class EditLiteraturView extends GetView<EditLiteraturController> {
                     Container(
                       height: Get.height / 18,
                       child: TextField(
+                        style: TextStyle(
+                          color: Color(0xFF240B74),
+                        ),
                         onChanged: (value) {
                           controller.title.value = value;
                         },
                         decoration: InputDecoration(
+                          prefixIcon: Icon(
+                            Icons.book_outlined,
+                            color: Color(0xFF240B74),
+                          ),
                           hintText: controller.title.value.isEmpty
                               ? literature.title
                               : 'Masukan Judul Literatur',
                           contentPadding: EdgeInsets.symmetric(horizontal: 12),
-                          hintStyle: TextStyle(color: Colors.black),
+                          hintStyle: TextStyle(
+                            color: Color(0xFF240B74),
+                          ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -157,7 +174,7 @@ class EditLiteraturView extends GetView<EditLiteraturController> {
                             borderRadius: BorderRadius.circular(10),
                             borderSide: BorderSide(
                               color: Color(0xFF240B74),
-                              width: 2,
+                              width: 1,
                             ),
                           ),
                           enabledBorder: OutlineInputBorder(
@@ -179,12 +196,21 @@ class EditLiteraturView extends GetView<EditLiteraturController> {
                         onChanged: (value) {
                           controller.name.value = value;
                         },
+                        style: TextStyle(
+                          color: Color(0xFF240B74),
+                        ),
                         decoration: InputDecoration(
+                          prefixIcon: Icon(
+                            Icons.person_3_outlined,
+                            color: Color(0xFF240B74),
+                          ),
                           hintText: controller.name.value.isEmpty
                               ? literature.name
                               : 'Masukan Nama Pengarang',
                           contentPadding: EdgeInsets.symmetric(horizontal: 12),
-                          hintStyle: TextStyle(color: Colors.black),
+                          hintStyle: TextStyle(
+                            color: Color(0xFF240B74),
+                          ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -192,7 +218,7 @@ class EditLiteraturView extends GetView<EditLiteraturController> {
                             borderRadius: BorderRadius.circular(10),
                             borderSide: BorderSide(
                               color: Color(0xFF240B74),
-                              width: 4,
+                              width: 1,
                             ),
                           ),
                           enabledBorder: OutlineInputBorder(
@@ -207,13 +233,26 @@ class EditLiteraturView extends GetView<EditLiteraturController> {
                             TextEditingController(text: literature.name),
                       ),
                     ),
-                    SizedBox(height: Get.height / 20),
+                    SizedBox(
+                      height: 30,
+                    ),
                     Obx(
                       () => controller.uploading.value
                           ? CircularProgressIndicator()
                           : Container(
-                              width: Get.width / 2,
-                              height: Get.height / 18,
+                              width: 269,
+                              height: 45,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color(0xFF6658FB),
+                                    Color(0xFF8C58FB)
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
                               child: ElevatedButton(
                                 onPressed: () {
                                   controller.updateLiterature();
@@ -226,7 +265,7 @@ class EditLiteraturView extends GetView<EditLiteraturController> {
                                 ),
                                 style: ElevatedButton.styleFrom(
                                   foregroundColor: Colors.white,
-                                  backgroundColor: Color(0xFF240B74),
+                                  backgroundColor: Colors.transparent,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
                                   ),

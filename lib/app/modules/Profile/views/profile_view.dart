@@ -1,4 +1,6 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/profile_controller.dart';
@@ -126,10 +128,10 @@ class ProfileView extends GetView<ProfileController> {
                     SizedBox(height: 16),
                     Container(
                       width: Get.width,
-                      height: Get.height / 2.1,
+                      height: Get.height / 2.3,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: Colors.white.withOpacity(0.8),
+                        color: Colors.white,
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black.withOpacity(0.2),
@@ -143,120 +145,161 @@ class ProfileView extends GetView<ProfileController> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(
-                                  10,
-                                ),
+                            TextFormField(
+                              style: TextStyle(
                                 color: Color(0xFF240B74),
                               ),
-                              child: TextFormField(
-                                style: TextStyle(color: Colors.white),
-                                controller: controller.nameController,
-                                decoration: InputDecoration(
-                                  labelText: 'Nama',
-                                  labelStyle: TextStyle(color: Colors.white),
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.transparent),
+                              controller: controller.nameController,
+                              decoration: InputDecoration(
+                                prefixIcon: Icon(
+                                  Icons.person,
+                                  color: Color(0xFF240B74),
+                                ),
+                                hintText: 'Masukan Nama',
+                                hintStyle: TextStyle(
+                                  color: Color(0xFF240B74),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: Color(0xFF240B74),
+                                    width: 1,
                                   ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.transparent),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: Color(0xFF240B74),
+                                    width: 1,
                                   ),
-                                  contentPadding: EdgeInsets.symmetric(
-                                    vertical: 10,
-                                    horizontal: 10,
-                                  ),
+                                ),
+                                contentPadding: EdgeInsets.symmetric(
+                                  vertical: 10,
+                                  horizontal: 10,
                                 ),
                               ),
                             ),
                             SizedBox(height: 16),
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(
-                                  10,
-                                ),
+                            TextFormField(
+                              style: TextStyle(
                                 color: Color(0xFF240B74),
                               ),
-                              child: TextFormField(
-                                style: TextStyle(color: Colors.white),
-                                controller: controller.emailController,
-                                decoration: InputDecoration(
-                                  labelText: 'Email',
-                                  labelStyle: TextStyle(color: Colors.white),
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.transparent),
+                              controller: controller.emailController,
+                              decoration: InputDecoration(
+                                prefixIcon: Icon(
+                                  Icons.email,
+                                  color: Color(0xFF240B74),
+                                ),
+                                hintText: 'Masukan Email',
+                                hintStyle: TextStyle(
+                                  color: Color(0xFF240B74),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: Color(0xFF240B74),
+                                    width: 1,
                                   ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.transparent),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: Color(0xFF240B74),
+                                    width: 1,
                                   ),
-                                  contentPadding: EdgeInsets.symmetric(
-                                    vertical: 10,
-                                    horizontal: 10,
-                                  ),
+                                ),
+                                contentPadding: EdgeInsets.symmetric(
+                                  vertical: 10,
+                                  horizontal: 10,
                                 ),
                               ),
                             ),
                             SizedBox(height: 16),
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(
-                                  10,
-                                ),
+                            TextFormField(
+                              style: TextStyle(
                                 color: Color(0xFF240B74),
                               ),
-                              child: TextFormField(
-                                style: TextStyle(color: Colors.white),
-                                controller: controller.phoneController,
-                                decoration: InputDecoration(
-                                  labelText: 'No Hp',
-                                  labelStyle: TextStyle(color: Colors.white),
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.transparent),
+                              controller: controller.phoneController,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.allow(
+                                  RegExp(r'[0-9]'),
+                                ),
+                              ],
+                              keyboardType: TextInputType.phone,
+                              decoration: InputDecoration(
+                                prefixIcon: Icon(
+                                  Icons.phone_android,
+                                  color: Color(0xFF240B74),
+                                ),
+                                hintText: 'Masukan No Hp',
+                                hintStyle: TextStyle(
+                                  color: Color(0xFF240B74),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: Color(0xFF240B74),
+                                    width: 1,
                                   ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.transparent),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: Color(0xFF240B74),
+                                    width: 1,
                                   ),
-                                  contentPadding: EdgeInsets.symmetric(
-                                    vertical: 10,
-                                    horizontal: 10,
-                                  ),
+                                ),
+                                contentPadding: EdgeInsets.symmetric(
+                                  vertical: 10,
+                                  horizontal: 10,
                                 ),
                               ),
                             ),
                             SizedBox(height: 16),
-                            Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(
-                                  10,
+                            DropdownSearch<String>(
+                              items: const ["Laki - Laki", "Perempuan"],
+                              dropdownDecoratorProps: DropDownDecoratorProps(
+                                baseStyle: TextStyle(
+                                  color: Color(0xFF240B74),
                                 ),
-                                color: Color(0xFF240B74),
-                              ),
-                              child: TextFormField(
-                                style: TextStyle(color: Colors.white),
-                                controller: controller.genderController,
-                                decoration: InputDecoration(
-                                  labelText: 'Jenis Kelamin',
-                                  labelStyle: TextStyle(color: Colors.white),
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.transparent),
+                                dropdownSearchDecoration: InputDecoration(
+                                  prefixIcon: Icon(
+                                    Icons.male,
+                                    color: Color(0xFF240B74),
                                   ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.transparent),
+                                  iconColor: Color(0xFF240B74),
+                                  focusColor: Colors.transparent,
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(
+                                      color: Color(0xFF240B74),
+                                      width: 1,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(
+                                      color: Color(0xFF240B74),
+                                      width: 1,
+                                    ),
                                   ),
                                   contentPadding: EdgeInsets.symmetric(
                                     vertical: 10,
                                     horizontal: 10,
                                   ),
+                                  fillColor: Colors.white,
+                                  suffixIconColor: Color(0xFF240B74),
                                 ),
                               ),
+                              popupProps: const PopupProps.menu(
+                                constraints: BoxConstraints(maxHeight: 100),
+                                showSearchBox: false,
+                                showSelectedItems: true,
+                              ),
+                              selectedItem: controller.genderController.text,
+                              onChanged: (newValue) {
+                                controller.setSelected(newValue!);
+                              },
                             ),
                             TextButton(
                               onPressed: () {
@@ -274,8 +317,19 @@ class ProfileView extends GetView<ProfileController> {
                             ),
                             Center(
                               child: Container(
-                                width: Get.width / 2,
-                                height: Get.height / 18,
+                                width: 269,
+                                height: 45,
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Color(0xFF6658FB),
+                                      Color(0xFF8C58FB)
+                                    ],
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
                                 child: ElevatedButton(
                                   onPressed: () {
                                     controller.updateUserProfile();
@@ -288,7 +342,7 @@ class ProfileView extends GetView<ProfileController> {
                                   ),
                                   style: ElevatedButton.styleFrom(
                                     foregroundColor: Colors.white,
-                                    backgroundColor: Color(0xFF240B74),
+                                    backgroundColor: Colors.transparent,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10),
                                     ),

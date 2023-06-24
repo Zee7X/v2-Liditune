@@ -69,7 +69,7 @@ class LiteraturAdminView extends GetView<LiteraturAdminController> {
                     child: Container(
                       height: Get.height / 8,
                       decoration: BoxDecoration(
-                        color: Color(0xFF252835),
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(25),
                       ),
                       child: Center(
@@ -79,7 +79,7 @@ class LiteraturAdminView extends GetView<LiteraturAdminController> {
                             overflow: TextOverflow.ellipsis,
                             style: GoogleFonts.poppins(
                               textStyle: const TextStyle(
-                                color: Colors.white,
+                                color: Colors.black,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w700,
                               ),
@@ -90,7 +90,7 @@ class LiteraturAdminView extends GetView<LiteraturAdminController> {
                             overflow: TextOverflow.ellipsis,
                             style: GoogleFonts.poppins(
                               textStyle: const TextStyle(
-                                color: Colors.white,
+                                color: Colors.black,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -123,7 +123,7 @@ class LiteraturAdminView extends GetView<LiteraturAdminController> {
                                 },
                                 child: Icon(
                                   Icons.edit,
-                                  color: Colors.white,
+                                  color: Colors.black,
                                 ),
                               ),
                               SizedBox(width: 16),
@@ -134,7 +134,7 @@ class LiteraturAdminView extends GetView<LiteraturAdminController> {
                                 },
                                 child: Icon(
                                   Icons.delete,
-                                  color: Colors.white,
+                                  color: Colors.black,
                                 ),
                               ),
                               SizedBox(width: 16),
@@ -142,11 +142,11 @@ class LiteraturAdminView extends GetView<LiteraturAdminController> {
                                     icon: literature.isPlaying.value
                                         ? Icon(
                                             Icons.stop_circle_outlined,
-                                            color: Colors.white,
+                                            color: Colors.black,
                                           )
                                         : Icon(
                                             Icons.play_circle,
-                                            color: Colors.white,
+                                            color: Colors.black,
                                           ),
                                     onPressed: () {
                                       controller

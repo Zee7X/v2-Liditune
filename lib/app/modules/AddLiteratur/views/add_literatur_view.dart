@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 import '../controllers/add_literatur_controller.dart';
 
 class AddLiteraturView extends GetView<AddLiteraturController> {
@@ -49,7 +48,7 @@ class AddLiteraturView extends GetView<AddLiteraturController> {
               height: Get.height / 2.3,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Colors.white.withOpacity(0.8),
+                color: Colors.white,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.2),
@@ -71,27 +70,27 @@ class AddLiteraturView extends GetView<AddLiteraturController> {
                         },
                         icon: Icon(Icons.image),
                         label: Obx(() => Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              width: 8,
-                            ),
-                            Expanded(
-                              child: Text(
-                                controller.imageName.value.isNotEmpty
-                                    ? controller.imageName.value
-                                    : 'Pilih Gambar Literatur',
-                                style: TextStyle(
-                                  overflow: TextOverflow.ellipsis,
-                                  fontSize: 14,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  width: 8,
                                 ),
-                              ),
-                            ),
-                          ],
-                        )),
+                                Expanded(
+                                  child: Text(
+                                    controller.imageName.value.isNotEmpty
+                                        ? controller.imageName.value
+                                        : 'Pilih Gambar Literatur',
+                                    style: TextStyle(
+                                      overflow: TextOverflow.ellipsis,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )),
                         style: ElevatedButton.styleFrom(
                           foregroundColor: Colors.white,
-                          backgroundColor: Color(0xFF240B74),
+                          backgroundColor: Color(0xFF6658FB),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -110,27 +109,27 @@ class AddLiteraturView extends GetView<AddLiteraturController> {
                         },
                         icon: Icon(Icons.audio_file),
                         label: Obx(() => Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              width: 8,
-                            ),
-                            Expanded(
-                              child: Text(
-                                controller.audioName.value.isNotEmpty
-                                    ? controller.audioName.value
-                                    : 'Pilih Audio Literatur',
-                                style: TextStyle(
-                                  overflow: TextOverflow.ellipsis,
-                                  fontSize: 14,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  width: 8,
                                 ),
-                              ),
-                            ),
-                          ],
-                        )),
+                                Expanded(
+                                  child: Text(
+                                    controller.audioName.value.isNotEmpty
+                                        ? controller.audioName.value
+                                        : 'Pilih Audio Literatur',
+                                    style: TextStyle(
+                                      overflow: TextOverflow.ellipsis,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )),
                         style: ElevatedButton.styleFrom(
                           foregroundColor: Colors.white,
-                          backgroundColor: Color(0xFF240B74),
+                          backgroundColor: Color(0xFF6658FB),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -143,13 +142,22 @@ class AddLiteraturView extends GetView<AddLiteraturController> {
                     Container(
                       height: Get.height / 18,
                       child: TextField(
+                        style: TextStyle(
+                          color: Color(0xFF240B74),
+                        ),
                         onChanged: (value) {
                           controller.title.value = value;
                         },
                         decoration: InputDecoration(
+                          prefixIcon: Icon(
+                            Icons.book_outlined,
+                            color: Color(0xFF240B74),
+                          ),
                           hintText: 'Masukan Judul Literatur',
                           contentPadding: EdgeInsets.symmetric(horizontal: 12),
-                          hintStyle: TextStyle(color: Colors.black),
+                          hintStyle: TextStyle(
+                            color: Color(0xFF240B74),
+                          ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -157,7 +165,7 @@ class AddLiteraturView extends GetView<AddLiteraturController> {
                             borderRadius: BorderRadius.circular(10),
                             borderSide: BorderSide(
                               color: Color(0xFF240B74),
-                              width: 2,
+                              width: 1,
                             ),
                           ),
                           enabledBorder: OutlineInputBorder(
@@ -176,13 +184,22 @@ class AddLiteraturView extends GetView<AddLiteraturController> {
                     Container(
                       height: Get.height / 18,
                       child: TextField(
+                        style: TextStyle(
+                          color: Color(0xFF240B74),
+                        ),
                         onChanged: (value) {
                           controller.name.value = value;
                         },
                         decoration: InputDecoration(
+                          prefixIcon: Icon(
+                            Icons.person_3_outlined,
+                            color: Color(0xFF240B74),
+                          ),
                           hintText: 'Masukan Nama Pengarang',
                           contentPadding: EdgeInsets.symmetric(horizontal: 12),
-                          hintStyle: TextStyle(color: Colors.black),
+                          hintStyle: TextStyle(
+                            color: Color(0xFF240B74),
+                          ),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
@@ -190,7 +207,7 @@ class AddLiteraturView extends GetView<AddLiteraturController> {
                             borderRadius: BorderRadius.circular(10),
                             borderSide: BorderSide(
                               color: Color(0xFF240B74),
-                              width: 4,
+                              width: 1,
                             ),
                           ),
                           enabledBorder: OutlineInputBorder(
@@ -204,13 +221,21 @@ class AddLiteraturView extends GetView<AddLiteraturController> {
                       ),
                     ),
                     SizedBox(
-                      height: Get.height / 20,
+                      height: 30,
                     ),
                     Obx(() => controller.uploading.value
                         ? CircularProgressIndicator()
                         : Container(
-                            width: Get.width / 2,
-                            height: Get.height / 18,
+                            width: 269,
+                            height: 45,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [Color(0xFF6658FB), Color(0xFF8C58FB)],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                              ),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                             child: ElevatedButton(
                               onPressed: () {
                                 controller.uploadToFirebase();
@@ -223,7 +248,7 @@ class AddLiteraturView extends GetView<AddLiteraturController> {
                               ),
                               style: ElevatedButton.styleFrom(
                                 foregroundColor: Colors.white,
-                                backgroundColor: Color(0xFF240B74),
+                                backgroundColor: Colors.transparent,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 ),
@@ -240,5 +265,3 @@ class AddLiteraturView extends GetView<AddLiteraturController> {
     );
   }
 }
-
-

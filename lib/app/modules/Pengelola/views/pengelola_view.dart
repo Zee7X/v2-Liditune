@@ -61,8 +61,8 @@ class PengelolaView extends GetView<PengelolaController> {
                 return Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: Container(
-                    width: 337,
-                    height: 149,
+                    width: Get.width / 1.06,
+                    height: Get.height / 5.3,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20),

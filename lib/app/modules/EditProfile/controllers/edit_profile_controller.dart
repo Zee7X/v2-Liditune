@@ -11,6 +11,7 @@ class EditProfileController extends GetxController {
   RxString nama = RxString('');
   RxString gender = RxString('');
   RxString no = RxString('');
+  var selected = RxString('');
 
   @override
   void onInit() {
@@ -19,6 +20,13 @@ class EditProfileController extends GetxController {
     nama.value = pengelola.nama;
     gender.value = pengelola.gender;
     no.value = pengelola.no;
+  }
+
+  setSelected(String value) {
+    selected.value = value;
+    if (selected.isNotEmpty) {
+      gender.value = selected.value;
+    }
   }
 
   Future<void> updateProfile(String documentId) async {

@@ -21,6 +21,7 @@ class ProfileController extends GetxController {
   TextEditingController phoneController = TextEditingController();
   TextEditingController genderController = TextEditingController();
   String profileImageUrl = '';
+  var selected = ''.obs;
 
   String getImagePlaceholder(String name) {
     if (name.isEmpty) return '';
@@ -36,6 +37,13 @@ class ProfileController extends GetxController {
       }
     }
     return initials;
+  }
+
+  setSelected(String value) {
+    selected.value = value;
+    if (selected.isNotEmpty) {
+      genderController.text = selected.toString();
+    }
   }
 
   @override
