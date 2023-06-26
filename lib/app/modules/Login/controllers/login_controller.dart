@@ -33,7 +33,8 @@ class LoginController extends GetxController {
               actions: [
                 OutlinedButton(
                   onPressed: () {
-                    isLoading.value = false;
+                    isLoading.value = false
+                    ;
                     Get.back();
                   },
                   child: const Text("CANCEL"),

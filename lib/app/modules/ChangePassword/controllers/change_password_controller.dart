@@ -67,8 +67,8 @@ class ChangePasswordController extends GetxController {
                   style:
                       TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
                 ),
-                backgroundColor: Colors.white,
-                colorText: Colors.black,
+                backgroundColor: Color(0Xff252835),
+                colorText: Colors.white,
                 borderWidth: 1,
                 borderColor: Colors.grey.withOpacity(0.2),
                 e.code.toLowerCase());
@@ -81,8 +81,8 @@ class ChangePasswordController extends GetxController {
               'Terjadi Kesalahan',
               style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
             ),
-            backgroundColor: Colors.white,
-            colorText: Colors.black,
+            backgroundColor: Color(0Xff252835),
+            colorText: Colors.white,
             borderWidth: 1,
             borderColor: Colors.grey.withOpacity(0.2),
           );
@@ -97,8 +97,8 @@ class ChangePasswordController extends GetxController {
             'Terjadi Kesalahan',
             style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
           ),
-          backgroundColor: Colors.white,
-          colorText: Colors.black,
+          backgroundColor: Color(0Xff252835),
+          colorText: Colors.white,
           borderWidth: 1,
           borderColor: Colors.grey.withOpacity(0.2),
         );
@@ -111,8 +111,8 @@ class ChangePasswordController extends GetxController {
           'Terjadi Kesalahan',
           style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
         ),
-        backgroundColor: Colors.white,
-        colorText: Colors.black,
+        backgroundColor: Color(0Xff252835),
+        colorText: Colors.white,
         borderWidth: 1,
         borderColor: Colors.grey.withOpacity(0.2),
       );
