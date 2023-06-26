@@ -64,7 +64,9 @@ class AboutUsView extends GetView<AboutUsController> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    controller.openInstagramLink();
+                  },
                   child: Container(
                     width: Get.width / 2.3,
                     height: Get.height / 4.7,
@@ -109,7 +111,9 @@ class AboutUsView extends GetView<AboutUsController> {
                 ),
                 SizedBox(width: 10),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    controller.openWhatsAppLink();
+                  },
                   child: Container(
                     width: Get.width / 2.3,
                     height: Get.height / 4.7,

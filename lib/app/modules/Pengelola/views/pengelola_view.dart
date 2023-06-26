@@ -134,78 +134,75 @@ class PengelolaView extends GetView<PengelolaController> {
                             ],
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 8.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 40,
-                                width: 40,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
-                                  color: Color(0XFF15D863),
-                                ),
-                                child: IconButton(
-                                  icon: Icon(
-                                    Icons.edit,
-                                    color: Colors.white,
-                                  ),
-                                  onPressed: () async {
-                                    final updatedPengelola =
-                                        await getPengelolaData(
-                                            pengelola.documentId);
-                                    if (updatedPengelola != null) {
-                                      Get.toNamed(
-                                        Routes.EDIT_PROFILE,
-                                        arguments: updatedPengelola,
-                                      );
-                                    } else {
-                                      print('Tidak Ada Data');
-                                    }
-                                  },
-                                ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                color: Color(0XFF15D863),
                               ),
-                              SizedBox(height: 5),
-                              Container(
-                                height: 40,
-                                width: 40,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
-                                  color: Color(0XFFFF3589),
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.edit,
+                                  color: Colors.white,
                                 ),
-                                child: IconButton(
-                                  icon: Icon(Icons.delete, color: Colors.white),
-                                  onPressed: () {
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) => AlertDialog(
-                                        title: Text('Konfirmasi Hapus'),
-                                        content: Text(
-                                            'Yakin ingin menghapus pengelola?'),
-                                        actions: [
-                                          TextButton(
-                                            child: Text('Batal'),
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
-                                          ),
-                                          TextButton(
-                                            child: Text('Hapus'),
-                                            onPressed: () {
-                                              controller.deletePengelola(
-                                                  pengelola.documentId);
-                                              Navigator.pop(context);
-                                            },
-                                          ),
-                                        ],
-                                      ),
+                                onPressed: () async {
+                                  final updatedPengelola =
+                                      await getPengelolaData(
+                                          pengelola.documentId);
+                                  if (updatedPengelola != null) {
+                                    Get.toNamed(
+                                      Routes.EDIT_PROFILE,
+                                      arguments: updatedPengelola,
                                     );
-                                  },
-                                ),
+                                  } else {
+                                    print('Tidak Ada Data');
+                                  }
+                                },
                               ),
-                            ],
-                          ),
+                            ),
+                            SizedBox(height: 5),
+                            Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                color: Color(0XFFFF3589),
+                              ),
+                              child: IconButton(
+                                icon: Icon(Icons.delete, color: Colors.white),
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                      title: Text('Konfirmasi Hapus'),
+                                      content: Text(
+                                          'Yakin ingin menghapus pengelola?'),
+                                      actions: [
+                                        TextButton(
+                                          child: Text('Batal'),
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                        ),
+                                        TextButton(
+                                          child: Text('Hapus'),
+                                          onPressed: () {
+                                            controller.deletePengelola(
+                                                pengelola.documentId);
+                                            Navigator.pop(context);
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
                         )
                       ],
                     ),
