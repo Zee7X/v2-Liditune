@@ -1,0 +1,14 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read: if true; // Allow read access to all users for all documents
+      allow write: if true; // Allow write access only to authenticated users
+    }
+
+    match /literatur/{document=**} {
+      allow read: if true; // Allow read access to all users for the "literatur" collection
+    }
+  }
+}
