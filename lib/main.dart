@@ -24,7 +24,7 @@ void main() async {
   runApp(
     GetMaterialApp(
       title: "Liditune",
-      initialRoute: Routes.ADMIN_HOME,
+      initialRoute: Routes.HOME,
       getPages: AppPages.routes,
       debugShowCheckedModeBanner: false,
     ),

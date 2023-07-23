@@ -196,7 +196,7 @@ class LiteraturView extends GetView<LiteraturController> {
                   InkWell(
                     onTap: () {
                       if (controller.currentPlayingLiterature.isPlaying) {
-                        controller.stopLiteratureAudio();
+                        controller.pauseLiteratureAudio();
                       } else {
                         final currentLiterature =
                             controller.uploadedLiteratures.isNotEmpty

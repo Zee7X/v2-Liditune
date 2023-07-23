@@ -26,6 +26,16 @@ class HomeController extends GetxController {
     }
   }
 
+  Future<void> LongPressVoid() async {
+    {
+      await flutterTts.setLanguage("id-ID");
+      await flutterTts.setPitch(1.0);
+      await flutterTts.speak(
+        'Anda Memasuki Halaman Login, jika anda pengguna silahkan klik tombol atas kiri untuk kembali ke home',
+      );
+    }
+  }
+
   Future<void> stopSpeaking() async {
     final result = await flutterTts.stop();
     if (result == 1) {

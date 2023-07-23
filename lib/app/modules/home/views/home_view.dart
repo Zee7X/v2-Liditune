@@ -43,6 +43,7 @@ class HomeView extends GetView<HomeController> {
                   },
                   onLongPress: () {
                     Get.toNamed(Routes.LOGIN);
+                    controller.LongPressVoid();
                   },
                 ),
               ),

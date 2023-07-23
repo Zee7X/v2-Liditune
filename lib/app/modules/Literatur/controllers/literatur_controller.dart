@@ -119,6 +119,30 @@ class LiteraturController extends GetxController {
     }
   }
 
+  void pauseLiteratureAudio() async {
+    try {
+      if (audioPlayer.state == PlayerState.playing) {
+        await audioPlayer.pause();
+        currentPlayingLiterature.isPlaying = false;
+        update();
+      }
+    } catch (e) {
+      print('Error pausing audio: $e');
+    }
+  }
+
+  void resumeLiteratureAudio() async {
+    try {
+      if (audioPlayer.state == PlayerState.paused) {
+        await audioPlayer.resume();
+        currentPlayingLiterature.isPlaying = true;
+        update();
+      }
+    } catch (e) {
+      print('Error resuming audio: $e');
+    }
+  }
+
   void playNextLiterature() {
     if (currentIndex < uploadedLiteratures.length - 1) {
       stopLiteratureAudio();
