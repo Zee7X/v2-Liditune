@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:file_picker/file_picker.dart';
+import 'package:literasi_digital_tuna_netra/app/modules/Profile/controllers/profile_controller.dart';
 import '../../LiteraturAdmin/controllers/literatur_admin_controller.dart';
 
 class AddLiteraturController extends GetxController {
   final LiteraturAdminController literaturAdminController =
       Get.find<LiteraturAdminController>();
+  final ProfileController profileController = Get.find<ProfileController>();
   final firebase_storage.FirebaseStorage _storage =
       firebase_storage.FirebaseStorage.instance;
 
@@ -20,6 +22,11 @@ class AddLiteraturController extends GetxController {
   RxString name = RxString('');
   RxBool uploading = RxBool(false);
   RxBool isLoading = false.obs;
+
+  // Method to get the name of the logged-in administrator
+  String getLoggedInAdminName() {
+    return profileController.userName.value;
+  }
 
   Future<void> pickImage() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -75,6 +82,7 @@ class AddLiteraturController extends GetxController {
     String imageName = 'image_${DateTime.now().millisecondsSinceEpoch}.jpg';
     String audioName = 'audio_${DateTime.now().millisecondsSinceEpoch}.mp3';
     try {
+      String addedBy = getLoggedInAdminName();
       uploading.value = true;
       await _storage.ref(imageName).putFile(imageFile.value!);
       String imageUrl = await _storage.ref(imageName).getDownloadURL();
@@ -85,6 +93,7 @@ class AddLiteraturController extends GetxController {
         'title': title.value,
         'imageUrl': imageUrl,
         'audioUrl': audioUrl,
+        'addedBy': addedBy,
       });
       print('Berhasil Upload');
       literaturAdminController.fetchUploadedData();

@@ -137,6 +137,7 @@ class UploadedLiterature {
   late final String title;
   late final String imageUrl;
   late final String audioUrl;
+  late final String? addedBy;
   final AudioPlayer audioPlayer = AudioPlayer();
   RxBool isPlaying = RxBool(false);
 
@@ -146,6 +147,7 @@ class UploadedLiterature {
     required this.title,
     required this.imageUrl,
     required this.audioUrl,
+    required this.addedBy,
   });
 
   UploadedLiterature.empty()
@@ -164,6 +166,7 @@ class UploadedLiterature {
       title: data['title'],
       imageUrl: data['imageUrl'],
       audioUrl: data['audioUrl'],
+      addedBy: data['addedBy'],
     );
   }
 
@@ -200,6 +203,7 @@ Future<UploadedLiterature?> getLiteratureData(String? documentId) async {
         title: data['title'],
         imageUrl: data['imageUrl'],
         audioUrl: data['audioUrl'],
+        addedBy: data['addedBy'],
       );
     } else {
       print('Document does not exist');

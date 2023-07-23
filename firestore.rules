@@ -2,13 +2,14 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
+    // Access to all documents for authenticated users only
     match /{document=**} {
-      allow read: if true; // Allow read access to all users for all documents
-      allow write: if true; // Allow write access only to authenticated users
+      allow read, write: if request.auth != null;
     }
 
+    // Access to the "literatur" collection for all users, both authenticated and unauthenticated
     match /literatur/{document=**} {
-      allow read: if true; // Allow read access to all users for the "literatur" collection
+      allow read: if true;
     }
   }
 }

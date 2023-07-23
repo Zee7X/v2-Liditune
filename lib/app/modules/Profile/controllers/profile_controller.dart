@@ -22,6 +22,7 @@ class ProfileController extends GetxController {
   TextEditingController genderController = TextEditingController();
   String profileImageUrl = '';
   var selected = ''.obs;
+  RxString userName = RxString('');
 
   String getImagePlaceholder(String name) {
     if (name.isEmpty) return '';
@@ -69,6 +70,7 @@ class ProfileController extends GetxController {
             if (newProfile != userProfile.value) {
               userProfile.value = newProfile;
               nameController.text = userProfile.value!['nama'];
+              userName.value = userProfile.value!['nama'];
               emailController.text = userProfile.value!['email'];
               phoneController.text = userProfile.value!['no'];
               genderController.text = userProfile.value!['gender'];

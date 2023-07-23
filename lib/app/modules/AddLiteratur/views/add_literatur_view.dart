@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../Profile/controllers/profile_controller.dart';
 import '../controllers/add_literatur_controller.dart';
 
 class AddLiteraturView extends GetView<AddLiteraturController> {
   @override
   Widget build(BuildContext context) {
+    Get.put<ProfileController>(ProfileController());
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
