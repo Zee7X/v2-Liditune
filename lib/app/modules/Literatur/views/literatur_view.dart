@@ -112,6 +112,7 @@ class LiteraturView extends GetView<LiteraturController> {
                           InkWell(
                             onTap: () {
                               controller.playPreviousLiterature();
+                              controller.onUserInteraction();
                             },
                             child: Container(
                               height: Get.height / 2.7,
@@ -166,6 +167,7 @@ class LiteraturView extends GetView<LiteraturController> {
                           InkWell(
                             onTap: () {
                               controller.playNextLiterature();
+                              controller.onUserInteraction();
                             },
                             child: Container(
                               height: Get.height / 2.7,
@@ -197,6 +199,7 @@ class LiteraturView extends GetView<LiteraturController> {
                     onTap: () {
                       if (controller.currentPlayingLiterature.isPlaying) {
                         controller.pauseLiteratureAudio();
+                        controller.onUserInteraction();
                       } else {
                         final currentLiterature =
                             controller.uploadedLiteratures.isNotEmpty
@@ -206,6 +209,7 @@ class LiteraturView extends GetView<LiteraturController> {
                         if (currentLiterature != null) {
                           controller.playLiteratureAudio(currentLiterature);
                           controller.stopSpeaking();
+                          controller.onUserInteraction();
                         }
                       }
                     },

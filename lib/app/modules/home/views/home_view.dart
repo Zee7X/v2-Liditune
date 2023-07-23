@@ -22,6 +22,7 @@ class HomeView extends GetView<HomeController> {
             children: [
               InkWell(
                 onTap: () {
+                  controller.onUserInteraction();
                   controller.stopSpeaking();
                   Get.toNamed(Routes.LITERATUR);
                 },
@@ -40,10 +41,12 @@ class HomeView extends GetView<HomeController> {
                   onTap: () {
                     controller.stopSpeaking();
                     controller.voidPress();
+                    controller.onUserInteraction();
                   },
                   onLongPress: () {
                     Get.toNamed(Routes.LOGIN);
                     controller.LongPressVoid();
+                    controller.onUserInteraction();
                   },
                 ),
               ),
@@ -51,6 +54,7 @@ class HomeView extends GetView<HomeController> {
                 onTap: () {
                   controller.stopSpeaking();
                   Get.toNamed(Routes.SCAN_QR);
+                  controller.onUserInteraction();
                 },
                 //QR
                 child: Menu(
@@ -67,6 +71,7 @@ class HomeView extends GetView<HomeController> {
                   onTap: () {
                     controller.stopSpeaking();
                     controller.voidPress();
+                    controller.onUserInteraction();
                   },
                 ),
               ),
@@ -74,6 +79,7 @@ class HomeView extends GetView<HomeController> {
                 onTap: () {
                   controller.stopSpeaking();
                   Get.toNamed(Routes.SCAN_OCR);
+                  controller.onUserInteraction();
                 },
                 //Bacakan
                 child: Menu(

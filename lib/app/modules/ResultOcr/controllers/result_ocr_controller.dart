@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
 
@@ -8,6 +10,9 @@ class ResultOcrController extends GetxController {
   final state = TtsState.stopped.obs;
   final RxBool isGoingBack = false.obs;
   var scannedText = ''.obs;
+  Timer? timer;
+  int secondsCounter = 0;
+  bool isSpeakingLiteracyPrompt = false;
 
   Future<void> initTts() async {
     await flutterTts.awaitSpeakCompletion(true);
@@ -41,8 +46,6 @@ class ResultOcrController extends GetxController {
     ;
   }
 
-
-
   Future<void> speake(String? text) async {
     if (text != null) {
       await flutterTts.setLanguage("id-ID");
@@ -58,13 +61,34 @@ class ResultOcrController extends GetxController {
     }
   }
 
+  void startSilentTimer() {
+    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      secondsCounter++;
+      if (secondsCounter >= 300 && !isSpeakingLiteracyPrompt) {
+        isSpeakingLiteracyPrompt = true;
+        speake('Silahkan lakukan kegiatan literasi');
+      }
+    });
+  }
+
+  void resetSilentTimer() {
+    secondsCounter = 0;
+    isSpeakingLiteracyPrompt = false;
+  }
+
+  void onUserInteraction() {
+    resetSilentTimer();
+  }
+
   @override
   void onInit() {
     super.onInit();
+    startSilentTimer();
     initTts();
   }
 
   void goBackToScreen() {
+    onUserInteraction();
     isGoingBack.value = true;
     stopSpeaking();
     Get.back();

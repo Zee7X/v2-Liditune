@@ -70,6 +70,7 @@ class ResultOcrView extends GetView<ResultOcrController> {
               onTap: () {
                 controller.stopSpeaking();
                 controller.speakText();
+                controller.onUserInteraction();
               },
               child: Menu(
                 bgcolor: const Color(0XFF8058FB),

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:camera/camera.dart';
@@ -22,10 +23,14 @@ class ScanOcrController extends GetxController with WidgetsBindingObserver {
   final RxBool isGoingBack = false.obs;
   final ResultOcrController resultOcrController =
       Get.put(ResultOcrController());
+  Timer? timer;
+  int secondsCounter = 0;
+  bool isSpeakingLiteracyPrompt = false;
 
   @override
   void onInit() {
     super.onInit();
+    startSilentTimer();
     WidgetsBinding.instance.addObserver(this);
     speakText(
       'Anda Memasuki Fitur Bacakan. Fitur ini melakukan pemindaian sebuah tulisan dengan cara mengambil gambar. Tekan atas untuk kembali, tekan bawah untuk mengambil gambar.',
@@ -42,6 +47,25 @@ class ScanOcrController extends GetxController with WidgetsBindingObserver {
       stopSpeaking();
     }
     super.onClose();
+  }
+
+  void startSilentTimer() {
+    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      secondsCounter++;
+      if (secondsCounter >= 300 && !isSpeakingLiteracyPrompt) {
+        isSpeakingLiteracyPrompt = true;
+        speakText('Silahkan lakukan kegiatan literasi');
+      }
+    });
+  }
+
+  void resetSilentTimer() {
+    secondsCounter = 0;
+    isSpeakingLiteracyPrompt = false;
+  }
+
+  void onUserInteraction() {
+    resetSilentTimer();
   }
 
   Future<void> requestCameraPermission() async {
@@ -145,6 +169,7 @@ class ScanOcrController extends GetxController with WidgetsBindingObserver {
   void goBackToHome() {
     isGoingBack.value = true;
     stopSpeaking();
+    onUserInteraction();
     Get.back();
     speakText('Anda kembali ke home. silahkan pilih fitur');
   }

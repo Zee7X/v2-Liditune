@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
 
@@ -6,6 +8,34 @@ enum TtsState { playing, stopped }
 class HomeController extends GetxController {
   final FlutterTts flutterTts = FlutterTts();
   final state = TtsState.stopped.obs;
+  Timer? timer;
+  int secondsCounter = 0;
+  bool isSpeakingLiteracyPrompt = false;
+
+  @override
+  void onInit() {
+    startSilentTimer();
+    super.onInit();
+  }
+
+  void startSilentTimer() {
+    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      secondsCounter++;
+      if (secondsCounter >= 300 && !isSpeakingLiteracyPrompt) {
+        isSpeakingLiteracyPrompt = true;
+        flutterTts.speak('Silahkan lakukan kegiatan literasi');
+      }
+    });
+  }
+
+  void resetSilentTimer() {
+    secondsCounter = 0;
+    isSpeakingLiteracyPrompt = false;
+  }
+
+  void onUserInteraction() {
+    resetSilentTimer();
+  }
 
   Future<void> speakText() async {
     {

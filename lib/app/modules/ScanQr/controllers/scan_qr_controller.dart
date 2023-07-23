@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:get/get.dart';
@@ -13,14 +15,37 @@ class ScanQrController extends GetxController {
   late QRViewController qrViewController;
   String convertedText = "";
   final RxBool isGoingBack = false.obs;
+  Timer? timer;
+  int secondsCounter = 0;
+  bool isSpeakingLiteracyPrompt = false;
 
   @override
   void onInit() {
     super.onInit();
     initTts();
+    startSilentTimer();
     speakText(
       'Anda Memasuki Fitur Scan QR, fitur untuk pemindaian QR dengan beberapa data yang sudah ada. Arahkan kamera ke kode QR, tekan atas untuk kembali.',
     );
+  }
+
+  void startSilentTimer() {
+    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      secondsCounter++;
+      if (secondsCounter >= 300 && !isSpeakingLiteracyPrompt) {
+        isSpeakingLiteracyPrompt = true;
+        speakText('Silahkan lakukan kegiatan literasi');
+      }
+    });
+  }
+
+  void resetSilentTimer() {
+    secondsCounter = 0;
+    isSpeakingLiteracyPrompt = false;
+  }
+
+  void onUserInteraction() {
+    resetSilentTimer();
   }
 
   void onClose() {
@@ -99,6 +124,7 @@ class ScanQrController extends GetxController {
   }
 
   void goBackToHome() {
+    onUserInteraction();
     isGoingBack.value = true;
     stopSpeaking();
     Get.back();

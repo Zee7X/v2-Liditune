@@ -55,7 +55,10 @@ class ScanQrView extends GetView<ScanQrController> {
             ),
             Obx(
               () => InkWell(
-                onTap: controller.playConvertedText,
+                onTap: () {
+                  controller.onUserInteraction();
+                  controller.playConvertedText();
+                },
                 child: Menu(
                   bgcolor: const Color(0XFF8058FB),
                   ico: Lottie.asset(

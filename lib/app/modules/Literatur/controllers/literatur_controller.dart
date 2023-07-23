@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -14,10 +16,14 @@ class LiteraturController extends GetxController {
   final FlutterTts flutterTts = FlutterTts();
   final RxBool isGoingBack = false.obs;
   RxBool isLoading = false.obs;
+  Timer? timer;
+  int secondsCounter = 0;
+  bool isSpeakingLiteracyPrompt = false;
 
   @override
   void onInit() {
     super.onInit();
+    startSilentTimer();
     fetchUploadedData().then((_) {
       if (uploadedLiteratures.isNotEmpty) {
         currentIndex.value = 0;
@@ -25,6 +31,25 @@ class LiteraturController extends GetxController {
             'Anda Memasuki Fitur Literatur, Fitur untuk melakukan kegiatan literasi dengan buku yang tersedia. tekan bawah untuk putar, tekan samping kiri untuk sebelumnya dan tekan samping kanan untuk berikutnya, tekan atas untuk kembali. Judul literatur saat ini ${uploadedLiteratures[currentIndex.value].title}, Karangan ${uploadedLiteratures[currentIndex.value].name}. Klik Tombol Bawah Untuk Putar');
       }
     });
+  }
+
+  void startSilentTimer() {
+    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      secondsCounter++;
+      if (secondsCounter >= 300 && !isSpeakingLiteracyPrompt) {
+        isSpeakingLiteracyPrompt = true;
+        speakText('Silahkan lakukan kegiatan literasi');
+      }
+    });
+  }
+
+  void resetSilentTimer() {
+    secondsCounter = 0;
+    isSpeakingLiteracyPrompt = false;
+  }
+
+  void onUserInteraction() {
+    resetSilentTimer();
   }
 
   Future<void> initTts() async {
@@ -61,6 +86,7 @@ class LiteraturController extends GetxController {
   void goBackToHome() {
     isGoingBack.value = true;
     stopSpeaking();
+    onUserInteraction();
     onBackPressed();
     Get.back();
     speakText('Anda kembali ke home. silahkan pilih fitur');

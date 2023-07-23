@@ -58,7 +58,10 @@ class ScanOcrView extends GetView<ScanOcrController> {
                       ),
                       Expanded(child: Container()),
                       InkWell(
-                        onTap: () => controller.scanImage(),
+                        onTap: () {
+                          controller.scanImage();
+                          controller.onUserInteraction();
+                        },
                         child: Menu(
                           bgcolor: const Color(0XFFFFAE5F),
                           ico: Lottie.asset(
